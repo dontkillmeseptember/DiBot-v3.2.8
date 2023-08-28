@@ -232,11 +232,18 @@ MESSAGES = [
 			"header": yml_loader.news_path['buttons_month']['button_seven'],
 			"message_text": yml_loader.news_path['message']['message_august_three'],
 			"inline_keyboard": InlineKeyboardMarkup().add(InlineKeyboardButton(yml_loader.news_path["button_keyboards"]["buttom_news_forward"], callback_data="forward_1_2"))
+		},
+		{
+			"month": 8,
+			"day": 28,
+			"header": yml_loader.news_path['buttons_month']['button_eight'],
+			"message_text": yml_loader.news_path['message']['message_august_four'],
+			"inline_keyboard": InlineKeyboardMarkup().add(InlineKeyboardButton(yml_loader.news_path["button_keyboards"]["buttom_news_forward"], callback_data="forward_1_3"))
 		}
 	],
 	# Сентябрь
 	[
-		# Добавьте информацию о днях в сентябре аналогично
+		
 	],
     # Октябрь
 	[

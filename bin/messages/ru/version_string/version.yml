@@ -1,0 +1,51 @@
+version:
+  button_update: ⚙️ Обновления — v{{version}}
+  button_update_info: <b>🧑🏻‍🦱💬 Выберите нужное вам обновление.</b>
+
+version_0_0_1:
+  button_update_jule_zero_zero_one: 👨🏻‍🎨📨 17.07.2023 — v0.0.1
+  button_update_jule_zero_zero_one_info: |
+    🧑🏻‍🦱💬 <b>Мы рады сообщить, что работа над <code>0.0.1</code> завершена. Теперь у вас доступны новые и улучшенные функции.</b> 🎉
+
+    <b> • Прочитать об обновлении можно здесь:</b>
+    <b> ↳ </b> {{version_one}}
+
+    <code>© Copyright 2023 - 2023 Все права защищены, ОАО «REDSLAV»</code>
+
+version_0_0_2:
+  button_update_jule_zero_zero_two: 🌍✈️ 06.08.2023 — v0.0.2
+  button_update_jule_zero_zero_two_info: |
+    🧑🏻‍🦱💬 <b>Даже не думал, что бот так будет развиваться, но встречайте обновление <code>0.0.2</code>! В этом обновлении улучшено быстродействие, улучшен календарь и т.д.</b>
+
+    <b> • Прочитать об обновлении можно здесь:</b>
+    <b> ↳ </b> {{version_two}}
+
+    <code>© Copyright 2023 - 2023 Все права защищены, ОАО «REDSLAV»</code>
+
+  button_update_jule_zero_one_two: ❕🔧 14.08.2023 — v0.1.2
+  button_update_jule_zero_one_two_info: |
+    🧑🏻‍🦱💬 <b>В этом обновлении <code>0.1.2</code> мы пофиксили некоторые ошибки и снова поменяли интерфейс бота!</b>
+
+    <b> • Прочитать об обновлении можно здесь:</b>
+    <b> ↳ </b> {{version_three}}
+
+    <code>© Copyright 2023 - 2023 Все права защищены, ОАО «REDSLAV»</code>
+
+  button_update_jule_zero_two_two: ❕💌 19.08.2023 — v0.2.2
+  button_update_jule_zero_two_two_info: |
+    🧑🏻‍🦱💬 <b>В этом обновлении <code>0.2.2</code> мы пофиксили сообщение от Динары.</b>
+
+    <b> • Прочитать об обновлении можно здесь:</b>
+    <b> ↳ </b> {{version_four}}
+
+    <code>© Copyright 2023 - 2023 Все права защищены, ОАО «REDSLAV»</code>
+
+version_0_0_3:
+  button_update_september_zero_zero_three:  28.08.2023 — v3.2.8
+  button_update_jule_zero_two_three_info: |
+    🧑🏻‍🦱💬 <b>Дорогие пользователи! Рады представить вам свежее обновление нашего продукта — v3.2.8! Это обновление приносит ряд захватывающих нововведений и улучшений, сделав ваш опыт использования еще комфортнее и продуктивнее.</b>
+
+    <b> • Прочитать об обновлении можно здесь:</b>
+    <b> ↳ </b> {{version_five}}
+
+    <code>© Copyright 2023 - 2023 Все права защищены, ОАО «REDSLAV»</code>

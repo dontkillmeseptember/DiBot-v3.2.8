@@ -1,0 +1,18 @@
+language:
+  button_language: 🌎 Сменить язык
+  button_language_info: <b>🧑🏻‍🦱💬 Выберите нужный вам язык.</b>
+  button_back: ⬅️ Вернуться назад
+
+select_language:
+  try_language: <b>🧑🏻‍🦱💬 Поменять язык приложения? Изначально он будет русский.</b>
+  language_info: <b>🧑🏻‍🦱💬 Выберите язык приложения:</b>
+
+buttons_language:
+  button_russian: 🇷🇺 Русский
+  button_english: 🇬🇧 English
+  button_georgian: 🇬🇪 ქართული
+  button_ukranian: 🇺🇦 Український
+  button_spanish: 🇪🇸 Español
+  button_french: 🇫🇷 Français
+  button_german: 🇩🇪 Deutsch
+  button_polish: 🇵🇱 Polski

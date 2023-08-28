@@ -1,0 +1,21 @@
+admin:
+  admin_role: 🤵🏻 Администратор
+  password: "<b>🧑🏻‍🦱💬 Введите пароль:</b>"
+  error_password: "<b>🧑🏻‍🦱💬 Неверный пароль. Попробуйте еще раз.</b>"
+  add_admin: "<b>🧑🏻‍🦱💬 Ваш <code>user_id</code> был успешно добавлен в базу данных. Теперь вам доступны возможности администратора.</b>"
+  has_admin: "<b>🧑🏻‍🦱💬 Ваш <code>user_id</code> уже есть в базе данных.</b>"
+
+exit_admin:
+  password: "<b>🧑🏻‍🦱💬 Введите пароль:</b>"
+  error_password: "<b>🧑🏻‍🦱💬 Неверный пароль. Попробуйте еще раз.</b>"
+  del_admin: "<b>🧑🏻‍🦱💬 Ваш <code>user_id</code> был успешно удален из базы данных.</b>"
+  nope_admin: "<b>🧑🏻‍🦱💬 Ваш <code>user_id</code> не найден в базе данных.</b>"
+
+delete_admin:
+  user_id: <b>🧑🏻‍🦱💬 Введите <code>user_id</code>, который вы хотите удалить из базы данных.</b>
+  invalid_user_id: <b>🧑🏻‍🦱💬 Вы ввели <code>user_id</code>, которого нету в базе данных.</b>
+  cannot_delete_self: <b>🧑🏻‍🦱💬 Вы не можете удалить свой <code>user_id</code> из базы данных. Для этого воспользуйтесь командой <code>/exit_admin</code>.</b>
+  admin_deleted: <b>🧑🏻‍🦱💬 Вы удалили <code>user_id</code> пользователя из базы данных.</b>
+  you_deleted: <b>🧑🏻‍🦱💬 Ваш <code>user_id</code> удалили из базы данных.</b>
+  user_not_admin: <b>🧑🏻‍🦱💬 Вы не являетесь администратором, чтобы пользоваться этой командой.</b>
+  

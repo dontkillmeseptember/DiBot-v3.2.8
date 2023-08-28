@@ -1,0 +1,12 @@
+logging
+asyncio
+datetime
+pytz
+sys
+subprocess
+schedule
+aiogram
+watchdog
+pathlib
+apscheduler
+requests

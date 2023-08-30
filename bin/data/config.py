@@ -20,6 +20,12 @@ SECRET_PASSWORD = os.getenv("ADMIN_PASSWORD")
 # Переменная для хранения паролья от регистрации
 PASSWORD = os.getenv("REGISTRATION_PASSWORD")
 
+# Переменная для хранения пароля для Игоря
+PASSWORD_IGOR = os.getenv("PASSWORD_IGOR")
+
+# Переменная для хранения пароля для Динары
+PASSWORD_DINARA = os.getenv("PASSWORD_DINARA")
+
 # Переменная для хранения сайта "Казино фортуны"
 FORTUNEWHEEL = os.getenv("WEBSITE_ONE")
 
@@ -35,8 +41,11 @@ VERSION_14_08 = os.getenv("VERSIONSITE_THREE")
 # Переменная для хранения сайта "Обновление за 19.08.2023"
 VERSION_19_08 = os.getenv("VERSIONSITE_FOUR")
 
-# Переменная для хранения сайта "Обновление за 01.09.2023"
+# Переменная для хранения сайта "Обновление за 27.08.2023"
 VERSION_01_09 = os.getenv("VERSIONSITE_FIVE")
+
+# Переменная для хранения сайта "Обновление за 30.08.2023"
+VERSION_30_08 = os.getenv("VERSIONSITE_SIX")
 
 # Переменная для хранения сайта "Об информации 1 части ведьмака"
 WITCHER_1 = os.getenv("WITCHER_ONE")

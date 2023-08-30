@@ -9,6 +9,7 @@ from data.config import (
     VERSION_14_08,
     VERSION_19_08,
     VERSION_01_09,
+    VERSION_30_08,
     # Переменные для ведьмаков
     WITCHER_1,
     WITCHER_2,
@@ -168,7 +169,7 @@ for key, value in version_data["version_0_0_2"].items():
 for key, value in version_data["version_0_0_3"].items():
     if isinstance(value, str) and "{{" in value and "}}" in value:
         # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
-        value = value.replace("{{version_five}}", str(VERSION_01_09)).strip()
+        value = value.replace("{{version_five}}", str(VERSION_01_09)).replace("{{version_six}}", str(VERSION_30_08)).strip()
         version_data["version_0_0_3"][key] = value
 
 # Путь к файлу language.yml
@@ -249,6 +250,13 @@ news_life_path = messages_dir.joinpath("messages", "ru", "news_string")
 with open(news_life_path / "news_life.yml", "r", encoding="utf-8") as f:
     news_life_path = yaml.safe_load(f)
 
+# Путь к файлу news.yml
+news_igor_path = messages_dir.joinpath("messages", "ru", "news_string")
+
+# Загрузить news.yml
+with open(news_igor_path / "news_igor.yml", "r", encoding="utf-8") as f:
+    news_igor_path = yaml.safe_load(f)
+
 # Путь к файлу sport.yml
 sport_path = messages_dir.joinpath("messages", "ru", "sport_string", "sport.yml")
 
@@ -311,3 +319,10 @@ notices_path = messages_dir.joinpath("messages", "ru", "handlers_string")
 # Загрузить notices.yml
 with open(notices_path / "notices.yml", "r", encoding="utf-8") as f:
     notices_path = yaml.safe_load(f)
+
+# Путь к файлу notices.yml
+role_path = messages_dir.joinpath("messages", "ru", "role_string")
+
+# Загрузить notices.yml
+with open(role_path / "role.yml", "r", encoding="utf-8") as f:
+    role_path = yaml.safe_load(f)

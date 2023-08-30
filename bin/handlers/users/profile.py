@@ -1,7 +1,8 @@
 from misc.loader import dp, bot
-from misc.util import InlineKeyboardMarkup, InlineKeyboardButton, types, FSMContext, State, StatesGroup, logging, Text
+from misc.util import InlineKeyboardMarkup, InlineKeyboardButton, types, FSMContext, State, StatesGroup, logging, Text, asyncio
 
 from data.start_db import check_user_data, load_user_data, save_user_data
+from data.config import PASSWORD_IGOR, PASSWORD_DINARA, SECRET_PASSWORD 
 
 from keyboards.holidays_contractual.fines.fines_count import rub_equivalent_formatted, usd_equivalent_formatted, amount_in_eth
 
@@ -10,10 +11,14 @@ from data import yml_loader
 class LanguageStateTwo(StatesGroup):
 	waiting_for_language_two = State()
 
+class RegistrationState(StatesGroup):
+	waiting_for_password_role = State()
+
 # Обработчик функции для inline_keyboards
 def profile_menu():
 	inline_keyboard = InlineKeyboardMarkup()
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.contract_path["contraft_interface"]["button_interface"], callback_data="interface_menu"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.role_path["role"]["shift_role"], callback_data="role_menu"))
 	# inline_keyboard.add(InlineKeyboardButton(yml_loader.mailings_path["mailings"]["button_mailings"], callback_data="mailings_menu"))
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.language_path["language"]["button_language"], callback_data="language_menu"))
 
@@ -56,6 +61,79 @@ async def profile_command(message: types.Message):
 		await bot.send_photo(chat_id=message.chat.id, photo=photo_file_id, caption=caption, reply_markup=inline_keyboard)
 	else:
 		await bot.send_message(message.chat.id, caption)
+
+# Обработчик вкладки "Идентифицировать новую роль"
+@dp.callback_query_handler(lambda c: c.data == 'role_menu')
+async def role_handler(callback_query: types.CallbackQuery):
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.language_path["language"]["button_back"], callback_data="back_profile"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.role_path["role"]["id_role"], callback_data="next_role"))
+
+	await bot.edit_message_caption(caption=yml_loader.role_path["role"]["role_menu_info"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+@dp.callback_query_handler(lambda c: c.data == 'next_role')
+async def role_start(callback_query: types.CallbackQuery):
+	await bot.edit_message_caption(caption=yml_loader.role_path["role"]["password_role"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id)
+
+	await RegistrationState.waiting_for_password_role.set()
+
+@dp.message_handler(state=RegistrationState.waiting_for_password_role)
+async def process_password_role(callback_query: types.CallbackQuery, state: FSMContext):
+	user_role = callback_query.text
+
+	if user_role == PASSWORD_IGOR:
+			user_id = callback_query.from_user.id
+			user_data = load_user_data()
+
+			text_select_none = f"<b>🧑🏻‍🦱💬 Вы успешно идентифицированы!</b>\n" \
+									"<b>     						↳ </b><b>Ваша уникальный роль: </b>" + f"<b>{yml_loader.role_path['roles']['role_igor']}</b>"
+
+			# Сохранение роли в user_data
+			user_data[str(user_id)]["role"] = yml_loader.role_path["roles"]["role_igor"]
+			save_user_data(user_data)
+
+			await bot.send_message(callback_query.from_user.id, text_select_none)
+
+			await asyncio.sleep(5)
+
+			await profile_end_two(callback_query, state)
+
+	elif user_role == PASSWORD_DINARA:
+			user_id = callback_query.from_user.id
+			user_data = load_user_data()
+
+			text_select_none = f"<b>🧑🏻‍🦱💬 Вы успешно идентифицированы!</b>\n" \
+									"<b>     						↳ </b><b>Ваша уникальный роль: </b>" + f"<b>{yml_loader.role_path['roles']['role_dinara']}</b>"
+
+			# Сохранение роли в user_data
+			user_data[str(user_id)]["role"] = yml_loader.role_path["roles"]["role_dinara"]
+			save_user_data(user_data)
+
+			await bot.send_message(callback_query.from_user.id, text_select_none)
+
+			await asyncio.sleep(5)
+
+			await profile_end_two(callback_query, state)
+	
+	elif user_role == SECRET_PASSWORD:
+			user_id = callback_query.from_user.id
+			user_data = load_user_data()
+
+			text_select_none = f"<b>🧑🏻‍🦱💬 Вы успешно идентифицированы!</b>\n" \
+									"<b>     						↳ </b><b>Ваша уникальный роль: </b>" + f"<b>{yml_loader.admin_path['admin']['admin_role']}</b>"
+
+			# Сохранение роли в user_data
+			user_data[str(user_id)]["role"] = yml_loader.admin_path["admin"]["admin_role"]
+			save_user_data(user_data)
+
+			await bot.send_message(callback_query.from_user.id, text_select_none)
+
+			await asyncio.sleep(5)
+
+			await profile_end_two(callback_query, state)
+
+	else:
+		await bot.send_message(callback_query.from_user.id, yml_loader.admin_path["admin"]["error_password"])
 
 # Обработчик вкладки "Сменить интерфейс договора"
 @dp.callback_query_handler(lambda c: c.data == 'interface_menu')
@@ -146,6 +224,45 @@ async def select_language(callback_query: types.CallbackQuery, state: FSMContext
 
 	except Exception:
 		logging.exception("Ошибочка")
+
+# Обработчик вкладки "Профиль после функций"
+async def profile_end_two(callback_query: types.CallbackQuery, state: FSMContext):
+	user = callback_query.from_user
+	userlastname = user.first_name
+	user_id = user.id
+	username = f"@{user.username}" if user.username else None
+
+	# Получаем фотографию пользователя
+	photo = await bot.get_user_profile_photos(user_id)
+
+	inline_keyboard = profile_menu()
+
+	# Получаем информацию о пользователе
+	user_data = check_user_data(user_id)
+	role = user_data.get("role", "Uxknow")
+	fines = user_data.get("fines", "Uxknow")
+	bot_id = user_data.get("bot_id", "Uxknow")
+	language = user_data.get("language", "Uxknow")
+
+	caption = f"<b>👩🏻‍🦰💬 Ваша текущая информация о профиле.</b>\n\n" \
+				f"<b> • Ваше имя на текущий момент: {userlastname}</b>\n" \
+				f"<b> • Ваше имя пользователя: {username}</b>\n" \
+				f"<b> • Ваш user_id: </b><code>{user_id}</code>\n\n" \
+				f"<b> • Ваш bot_id: </b><code>{bot_id}</code>\n" \
+				f"<b> • Ваша роль на данный момент: {role}</b>\n\n" \
+				f"<b> • Ваш прогресс в боевом пропуске: 0/60</b>\n\n" \
+				f"<b> • Ваша общая сумма штрафов: 💷 {fines} </b>₽\n" \
+				f"<b> • Ваш общий бюджет: 💷 {amount_in_eth} ETH — {usd_equivalent_formatted} $ ~ {rub_equivalent_formatted} </b>₽\n\n" \
+				f"<b> • Выбранный язык приложения: {language}</b>\n\n"
+				
+	if photo.photos:
+		# Берем текущую фотографию пользователя (первая в списке)
+		photo_file_id = photo.photos[0][-1].file_id
+		await bot.send_photo(chat_id=callback_query.chat.id, photo=photo_file_id, caption=caption, reply_markup=inline_keyboard)
+	else:
+		await bot.send_message(callback_query.chat.id, caption)
+
+	await state.finish()
 
 # Обработчик вкладки "Профиль после функций"
 async def profile_end(callback_query: types.CallbackQuery, state: FSMContext):

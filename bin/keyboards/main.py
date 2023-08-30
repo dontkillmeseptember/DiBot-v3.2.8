@@ -32,6 +32,9 @@ from keyboards.energy_training.energy_training_keyboards import dp as energy_tra
 from keyboards.energy_training.news.news_func import news_handler
 from keyboards.energy_training.news.news_keyboards import dp as news_dp
 
+from keyboards.energy_training.news_igor.news_igor_func import news_igor_handler
+from keyboards.energy_training.news_igor.news_igor_keyboards import dp as news_igor_dp
+
 from keyboards.energy_training.cooking.cooking_func import cooking_handler
 from keyboards.energy_training.cooking.cooking_keyboards import dp as cooking_dp
 

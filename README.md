@@ -1,7 +1,7 @@
 # Telegram-bot для моих друзей DiBot
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/dontkillmeseptember/DiBot-v0.0.3/master/content/DiBot.png" align="center" style="width: 50%" />
+<img src="https://github.com/dontkillmeseptember/DiBot/blob/v3.4.8/content/DiBot.png?raw=true" align="center" style="width: 50%" />
 </div>
 
 ## Команды бота:

@@ -243,7 +243,13 @@ MESSAGES = [
 	],
 	# Сентябрь
 	[
-		
+		{
+			"month": 9,
+			"day": 4,
+			"header": yml_loader.news_path['buttons_month']['button_nine'],
+			"message_text": yml_loader.news_path['message']['message_september_one'],
+			"inline_keyboard": InlineKeyboardMarkup().add(InlineKeyboardButton(yml_loader.news_path["button_keyboards"]["buttom_news_forward"], callback_data="forward_2_0"))
+		}
 	],
     # Октябрь
 	[

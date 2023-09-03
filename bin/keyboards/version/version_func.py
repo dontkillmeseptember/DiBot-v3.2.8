@@ -47,6 +47,7 @@ async def version_handler(message: types.Message):
 async def update_zero_zero_three_handler(callback_query: types.CallbackQuery):
 	# Отправляем новое сообщение с информацией об обновлении
 	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["version_0_0_3"]["button_update_august_3_4_8"], callback_data="update_3_4_8"))
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["version_0_0_3"]["button_update_august_3_3_8"], callback_data="update_3_3_8"))
 
 	await bot.send_message(
@@ -59,6 +60,7 @@ async def update_zero_zero_three_handler(callback_query: types.CallbackQuery):
 async def update_3_3_8_handler(callback_query: types.CallbackQuery):
 	# Отправляем новое сообщение с информацией об обновлении
 	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["version_0_0_3"]["button_update_august_3_4_8"], callback_data="update_3_4_8"))
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["version_0_0_3"]["button_update_september_zero_zero_three"], callback_data="update_3_2_8"))
 
 	await bot.edit_message_text(
@@ -68,10 +70,25 @@ async def update_3_3_8_handler(callback_query: types.CallbackQuery):
 			reply_markup=inline_keyboard
 		)
 
+@dp.callback_query_handler(lambda query: query.data == "update_3_4_8")
+async def update_3_4_8_handler(callback_query: types.CallbackQuery):
+	# Отправляем новое сообщение с информацией об обновлении
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["version_0_0_3"]["button_update_august_3_3_8"], callback_data="update_3_3_8"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["version_0_0_3"]["button_update_september_zero_zero_three"], callback_data="update_3_2_8"))
+
+	await bot.edit_message_text(
+			yml_loader.version_data["version_0_0_3"]["button_update_3.4.8_info"],
+			callback_query.from_user.id,
+			callback_query.message.message_id, 
+			reply_markup=inline_keyboard
+		)
+
 @dp.callback_query_handler(lambda query: query.data == "update_3_2_8")
 async def update_zero_zero_three_handler_two(callback_query: types.CallbackQuery):
 	# Отправляем новое сообщение с информацией об обновлении
 	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["version_0_0_3"]["button_update_august_3_4_8"], callback_data="update_3_4_8"))
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["version_0_0_3"]["button_update_august_3_3_8"], callback_data="update_3_3_8"))
 
 	await bot.edit_message_text(

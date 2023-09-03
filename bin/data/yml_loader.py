@@ -10,6 +10,7 @@ from data.config import (
     VERSION_19_08,
     VERSION_01_09,
     VERSION_30_08,
+    VERSION_03_09,
     # Переменные для ведьмаков
     WITCHER_1,
     WITCHER_2,
@@ -169,7 +170,7 @@ for key, value in version_data["version_0_0_2"].items():
 for key, value in version_data["version_0_0_3"].items():
     if isinstance(value, str) and "{{" in value and "}}" in value:
         # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
-        value = value.replace("{{version_five}}", str(VERSION_01_09)).replace("{{version_six}}", str(VERSION_30_08)).strip()
+        value = value.replace("{{version_five}}", str(VERSION_01_09)).replace("{{version_six}}", str(VERSION_30_08)).replace("{{version_seven}}", str(VERSION_03_09)).strip()
         version_data["version_0_0_3"][key] = value
 
 # Путь к файлу language.yml

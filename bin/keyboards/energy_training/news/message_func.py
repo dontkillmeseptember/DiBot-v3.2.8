@@ -13,12 +13,12 @@ async def send_delayed_message(chat_id, day_info, inline_keyboard):
 	target_datetime = moscow_tz.localize(target_datetime)
 
 	time_diff = target_datetime - current_datetime
-	days = time_diff.days
 	hours = time_diff.seconds // 3600
 	minutes = (time_diff.seconds % 3600) // 60
 
 	if time_diff.total_seconds() > 0:
-		await bot.send_message(chat_id, f"<b>👩🏻‍🦰💬 {day_info['header']} — будет доступна через: <code>{days} дней {hours} часов {minutes} минут.</code></b>")
+		await bot.send_message(chat_id, f"<b>👩🏻‍🦰💬 Вкладка: {day_info['header']}</b>\n" \
+						 				f"<b>   	     ↳ </b><b>будет доступна через: ⌛️<code>{hours} часов {minutes} минут</code></b>")
 	else:
 		await bot.send_message(chat_id, day_info["message_text"]["news_one"], reply_markup=inline_keyboard)
 
@@ -61,6 +61,18 @@ async def send_day_message(month_index, day_index, callback_query):
 	day_info = MESSAGES[month_index][day_index]
 	inline_keyboard = day_info["inline_keyboard"]
 	await send_delayed_message(callback_query.from_user.id, day_info, inline_keyboard)
+
+# Обработчик для кнопки "Сообщение за 04.09.2023"
+async def month_september_04_handler(callback_query: types.CallbackQuery):
+	await send_day_message(2, 0, callback_query)
+
+@dp.callback_query_handler(lambda query: query.data == "forward_2_0")
+async def process_callback_forward_september_04(callback_query: types.CallbackQuery):
+	await process_callback_forward(callback_query, 2, 0)
+
+@dp.callback_query_handler(lambda query: query.data == "backward_2_0")
+async def process_callback_backward_september_04(callback_query: types.CallbackQuery):
+	await process_callback_backward(callback_query, 2, 0)
 
 # Обработчик для кнопки "Сообщение за 28.08.2023"
 async def month_аugust_28_handler(callback_query: types.CallbackQuery):

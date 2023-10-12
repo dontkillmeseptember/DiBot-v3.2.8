@@ -24,8 +24,7 @@ def profile_menu():
 
 	return inline_keyboard
 
-# Обработка команды /profile
-@dp.message_handler(commands=['profile'])
+# Обработка профиля
 async def profile_command(message: types.Message):
 	inline_keyboard = profile_menu()
 
@@ -43,14 +42,16 @@ async def profile_command(message: types.Message):
 	fines = user_data.get("fines", "Uxknow")
 	bot_id = user_data.get("bot_id", "Uxknow")
 	language = user_data.get("language", "Uxknow")
+	smile = user_data.get("smile", "Uxknow")
+	battlepass = user_data.get("battlepass", "Uxknow")
 
 	caption = f"<b>👩🏻‍🦰💬 Ваша текущая информация о профиле.</b>\n\n" \
 				f"<b> • Ваше имя на текущий момент: {userlastname}</b>\n" \
 				f"<b> • Ваше имя пользователя: {username}</b>\n" \
 				f"<b> • Ваш user_id: </b><code>{user_id}</code>\n\n" \
 				f"<b> • Ваш bot_id: </b><code>{bot_id}</code>\n" \
-				f"<b> • Ваша роль на данный момент: {role}</b>\n\n" \
-				f"<b> • Ваш прогресс в боевом пропуске: 0/60</b>\n\n" \
+				f"<b> • Ваша роль на данный момент: {smile} {role}</b>\n\n" \
+				f"<b> • Ваш прогресс в боевом пропуске: {battlepass}</b>\n\n" \
 				f"<b> • Ваша общая сумма штрафов: 💷 {fines} </b>₽\n" \
 				f"<b> • Ваш общий бюджет: 💷 {amount_in_eth} ETH — {usd_equivalent_formatted} $ ~ {rub_equivalent_formatted} </b>₽\n\n" \
 				f"<b> • Выбранный язык приложения: {language}</b>\n\n"
@@ -86,10 +87,11 @@ async def process_password_role(callback_query: types.CallbackQuery, state: FSMC
 			user_data = load_user_data()
 
 			text_select_none = f"<b>🧑🏻‍🦱💬 Вы успешно идентифицированы!</b>\n" \
-									"<b>     						↳ </b><b>Ваша уникальный роль: </b>" + f"<b>{yml_loader.role_path['roles']['role_igor']}</b>"
+									"<b>     						↳ </b><b>Ваша уникальный роль: </b>" + f"<b>{yml_loader.start_bot_path['registor']['smile_igor']} {yml_loader.role_path['roles']['role_igor']}</b>"
 
 			# Сохранение роли в user_data
 			user_data[str(user_id)]["role"] = yml_loader.role_path["roles"]["role_igor"]
+			user_data[str(user_id)]["smile"] = yml_loader.start_bot_path["registor"]["smile_igor"]
 			save_user_data(user_data)
 
 			await bot.send_message(callback_query.from_user.id, text_select_none)
@@ -103,10 +105,11 @@ async def process_password_role(callback_query: types.CallbackQuery, state: FSMC
 			user_data = load_user_data()
 
 			text_select_none = f"<b>🧑🏻‍🦱💬 Вы успешно идентифицированы!</b>\n" \
-									"<b>     						↳ </b><b>Ваша уникальный роль: </b>" + f"<b>{yml_loader.role_path['roles']['role_dinara']}</b>"
+									"<b>     						↳ </b><b>Ваша уникальный роль: </b>" + f"<b>{yml_loader.start_bot_path['registor']['smile_dinara']} {yml_loader.role_path['roles']['role_dinara']}</b>"
 
 			# Сохранение роли в user_data
 			user_data[str(user_id)]["role"] = yml_loader.role_path["roles"]["role_dinara"]
+			user_data[str(user_id)]["smile"] = yml_loader.start_bot_path["registor"]["smile_dinara"]
 			save_user_data(user_data)
 
 			await bot.send_message(callback_query.from_user.id, text_select_none)
@@ -120,10 +123,11 @@ async def process_password_role(callback_query: types.CallbackQuery, state: FSMC
 			user_data = load_user_data()
 
 			text_select_none = f"<b>🧑🏻‍🦱💬 Вы успешно идентифицированы!</b>\n" \
-									"<b>     						↳ </b><b>Ваша уникальный роль: </b>" + f"<b>{yml_loader.admin_path['admin']['admin_role']}</b>"
+									"<b>     						↳ </b><b>Ваша уникальный роль: </b>" + f"<b>{yml_loader.start_bot_path['registor']['smile_admin']} {yml_loader.admin_path['admin']['admin_role']}</b>"
 
 			# Сохранение роли в user_data
 			user_data[str(user_id)]["role"] = yml_loader.admin_path["admin"]["admin_role"]
+			user_data[str(user_id)]["smile"] = yml_loader.start_bot_path["registor"]["smile_admin"]
 			save_user_data(user_data)
 
 			await bot.send_message(callback_query.from_user.id, text_select_none)
@@ -243,14 +247,16 @@ async def profile_end_two(callback_query: types.CallbackQuery, state: FSMContext
 	fines = user_data.get("fines", "Uxknow")
 	bot_id = user_data.get("bot_id", "Uxknow")
 	language = user_data.get("language", "Uxknow")
+	smile = user_data.get("smile", "Uxknow")
+	battlepass = user_data.get("battlepass", "Uxknow")
 
 	caption = f"<b>👩🏻‍🦰💬 Ваша текущая информация о профиле.</b>\n\n" \
 				f"<b> • Ваше имя на текущий момент: {userlastname}</b>\n" \
 				f"<b> • Ваше имя пользователя: {username}</b>\n" \
 				f"<b> • Ваш user_id: </b><code>{user_id}</code>\n\n" \
 				f"<b> • Ваш bot_id: </b><code>{bot_id}</code>\n" \
-				f"<b> • Ваша роль на данный момент: {role}</b>\n\n" \
-				f"<b> • Ваш прогресс в боевом пропуске: 0/60</b>\n\n" \
+				f"<b> • Ваша роль на данный момент: {smile} {role}</b>\n\n" \
+				f"<b> • Ваш прогресс в боевом пропуске: {battlepass}</b>\n\n" \
 				f"<b> • Ваша общая сумма штрафов: 💷 {fines} </b>₽\n" \
 				f"<b> • Ваш общий бюджет: 💷 {amount_in_eth} ETH — {usd_equivalent_formatted} $ ~ {rub_equivalent_formatted} </b>₽\n\n" \
 				f"<b> • Выбранный язык приложения: {language}</b>\n\n"
@@ -279,14 +285,16 @@ async def profile_end(callback_query: types.CallbackQuery, state: FSMContext):
 	fines = user_data.get("fines", "Uxknow")
 	bot_id = user_data.get("bot_id", "Uxknow")
 	language = user_data.get("language", "Uxknow")
+	smile = user_data.get("smile", "Uxknow")
+	battlepass = user_data.get("battlepass", "Uxknow")
 
 	caption = f"<b>👩🏻‍🦰💬 Ваша текущая информация о профиле.</b>\n\n" \
 				f"<b> • Ваше имя на текущий момент: {userlastname}</b>\n" \
 				f"<b> • Ваше имя пользователя: {username}</b>\n" \
 				f"<b> • Ваш user_id: </b><code>{user_id}</code>\n\n" \
 				f"<b> • Ваш bot_id: </b><code>{bot_id}</code>\n" \
-				f"<b> • Ваша роль на данный момент: {role}</b>\n\n" \
-				f"<b> • Ваш прогресс в боевом пропуске: 0/60</b>\n\n" \
+				f"<b> • Ваша роль на данный момент: {smile} {role}</b>\n\n" \
+				f"<b> • Ваш прогресс в боевом пропуске: {battlepass}</b>\n\n" \
 				f"<b> • Ваша общая сумма штрафов: 💷 {fines} </b>₽\n" \
 				f"<b> • Ваш общий бюджет: 💷 {amount_in_eth} ETH — {usd_equivalent_formatted} $ ~ {rub_equivalent_formatted} </b>₽\n\n" \
 				f"<b> • Выбранный язык приложения: {language}</b>\n\n"

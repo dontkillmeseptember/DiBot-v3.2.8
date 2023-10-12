@@ -62,6 +62,18 @@ async def send_day_message(month_index, day_index, callback_query):
 	inline_keyboard = day_info["inline_keyboard"]
 	await send_delayed_message(callback_query.from_user.id, day_info, inline_keyboard)
 
+# Обработчик для кнопки "Сообщение за 09.10.2023"
+async def month_october_09_handler(callback_query: types.CallbackQuery):
+	await send_day_message(3, 1, callback_query)
+
+@dp.callback_query_handler(lambda query: query.data == "forward_3_1")
+async def process_callback_forward_october_09(callback_query: types.CallbackQuery):
+	await process_callback_forward(callback_query, 3, 1)
+
+@dp.callback_query_handler(lambda query: query.data == "backward_3_1")
+async def process_callback_backward_october_09(callback_query: types.CallbackQuery):
+	await process_callback_backward(callback_query, 3, 1)
+
 # Обработчик для кнопки "Сообщение за 02.10.2023"
 async def month_october_02_handler(callback_query: types.CallbackQuery):
 	await send_day_message(3, 0, callback_query)

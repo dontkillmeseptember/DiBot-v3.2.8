@@ -37,7 +37,9 @@ from keyboards.energy_training.news.message_func import (
 	# Сообщения за 25.09.2023
 	month_september_25_handler,
 	# Сообщения за 02.10.2023
-	month_october_02_handler
+	month_october_02_handler,
+	# Сообщения за 09.10.2023
+	month_october_09_handler
 )
 
 # Свяжите функции обработки сообщений с диспетчером
@@ -100,3 +102,6 @@ dp.register_message_handler(month_september_25_handler, lambda message: message.
 
 # вкладка "Сообщение за 02.10.2023"
 dp.register_message_handler(month_october_02_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_thirteen"])
+
+# вкладка "Сообщение за 09.10.2023"
+dp.register_message_handler(month_october_09_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_fourteen"])

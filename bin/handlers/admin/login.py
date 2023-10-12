@@ -20,6 +20,7 @@ async def process_password_for_admin(message: types.Message):
 		user_id = message.from_user.id
 		username = message.from_user.username
 		user_admin = yml_loader.admin_path["admin"]["admin_role"]
+		user_smile = yml_loader.start_bot_path["registor"]["smile_admin"]
 
 		user_data = load_user_data()
 		admin_data = load_admin_data()
@@ -33,6 +34,7 @@ async def process_password_for_admin(message: types.Message):
 
 			# Обновляем роль пользователя в user_data.json
 			user_data[str(user_id)]["role"] = user_admin
+			user_data[str(user_id)]["smile"] = user_smile
 			save_user_data(user_data)
 		else:
 			await bot.send_message(user_id, yml_loader.admin_path["admin"]["has_admin"])
@@ -53,6 +55,7 @@ async def process_password_for_delete_admin(message: types.Message):
 	if user_password == SECRET_PASSWORD:
 		user_id = message.from_user.id
 		user_role = yml_loader.start_bot_path["registor"]["user_role"]
+		user_smile = yml_loader.start_bot_path["registor"]["smile_user"]
 
 		user_data = load_user_data()
 		admin_data = load_admin_data()
@@ -65,6 +68,7 @@ async def process_password_for_delete_admin(message: types.Message):
 
 			# Возвращаем роль "Пользователь" при выходе из администраторов
 			user_data[str(user_id)]["role"] = user_role
+			user_data[str(user_id)]["smile"] = user_smile
 			save_user_data(user_data)
 		else:
 			await bot.send_message(user_id, yml_loader.admin_path["exit_admin"]["nope_admin"])
@@ -93,6 +97,7 @@ async def process_user_id_for_delete_admin(message: types.Message):
 		return
 
 	user_role = yml_loader.start_bot_path["registor"]["user_role"]
+	user_smile = yml_loader.start_bot_path["registor"]["smile_user"]
 
 	user_data = load_user_data()
 	admin_data = load_admin_data()
@@ -106,6 +111,7 @@ async def process_user_id_for_delete_admin(message: types.Message):
 		# Обновляем роль пользователя при удалении администратора
 		if str(user_id_to_delete) in user_data:
 			user_data[str(user_id_to_delete)]["role"] = user_role
+			user_data[str(user_id_to_delete)]["smile"] = user_smile
 			save_user_data(user_data)
 	else:
 		await bot.send_message(message.from_user.id, yml_loader.admin_path["delete_admin"]["user_not_admin"])

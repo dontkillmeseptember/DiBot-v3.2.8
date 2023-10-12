@@ -280,6 +280,13 @@ MESSAGES = [
 			"header": yml_loader.news_path['buttons_month']['button_thirteen'],
 			"message_text": yml_loader.news_path['message']['message_october_one'],
 			"inline_keyboard": InlineKeyboardMarkup().add(InlineKeyboardButton(yml_loader.news_path["button_keyboards"]["buttom_news_forward"], callback_data="forward_3_0"))
+		},
+        {
+			"month": 10,
+			"day": 9,
+			"header": yml_loader.news_path['buttons_month']['button_fourteen'],
+			"message_text": yml_loader.news_path['message']['message_october_two'],
+			"inline_keyboard": InlineKeyboardMarkup().add(InlineKeyboardButton(yml_loader.news_path["button_keyboards"]["buttom_news_forward"], callback_data="forward_3_1"))
 		}
 	],
     # Ноябрь

@@ -6,5 +6,5 @@ role:
   nope_password: ⬅️ Отмена
 
 roles:
-  role_igor: 🐋 Китенок
-  role_dinara: 🐈 Котенок
+  role_igor: Китенок
+  role_dinara: Котенок

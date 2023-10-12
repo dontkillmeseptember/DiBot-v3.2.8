@@ -1,4 +1,4 @@
-from misc.util import os, json
+from misc.util import os, json, types
 
 # Функция для создания списка зарегистрированных пользователей
 def create_json_file(file_name):

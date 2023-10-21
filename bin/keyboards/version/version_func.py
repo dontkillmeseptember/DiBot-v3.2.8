@@ -1,13 +1,6 @@
-from misc.util import (
-	ReplyKeyboardMarkup,
-	KeyboardButton,
-	InlineKeyboardMarkup,
-	InlineKeyboardButton,
-	types,
-	datetime
-)
+from misc.util import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, types
 
-from misc.loader import bot, moscow_tz, dp
+from misc.loader import bot, dp
 
 from data import yml_loader
 
@@ -22,26 +15,9 @@ async def version_handler(message: types.Message):
 		KeyboardButton(yml_loader.version_data["version_0_0_3"]["button_update_september_zero_zero_three"])
 	)
 
-	# Получение текущей даты и времени
-	current_datetime = datetime.datetime.now(moscow_tz)
-	target_datetime = datetime.datetime(current_datetime.year, month=7, day=16, hour=23, minute=0, second=0)  # Целевая дата и время (17 июля, 00:00)
-	target_datetime = moscow_tz.localize(target_datetime)
-	
-	time_diff = target_datetime - current_datetime
+	keyboard.add(KeyboardButton(yml_loader.version_data["versions"]["button_update_4.5.4"]))
 
-	# Рассчитываем оставшееся время до целевой даты и времени
-	days = time_diff.days
-	hours = time_diff.seconds // 3600
-	minutes = (time_diff.seconds % 3600) // 60
-
-	if time_diff.total_seconds() > 0:
-		await bot.send_message(message.chat.id, f"<b>🧑🏻‍🦱💬 Вкладка — <code>{yml_loader.version_data['version']['button_update']}</code> будет доступна через: <code>{days} дней {hours} часов и {minutes} минут.</code></b>")
-	else: 
-		await bot.send_message(
-			message.chat.id, 
-			yml_loader.version_data["version"]["button_update_info"], 
-			reply_markup=keyboard
-		)
+	await bot.send_message(message.chat.id, yml_loader.version_data["version"]["button_update_info"], reply_markup=keyboard)
 
 # Обработчик вкладки "Обновление за 01.09.2023"
 async def update_zero_zero_three_handler(callback_query: types.CallbackQuery):

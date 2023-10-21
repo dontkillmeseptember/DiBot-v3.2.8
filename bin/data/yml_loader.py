@@ -180,13 +180,6 @@ language_path = messages_dir.joinpath("messages", "ru", "language.yml")
 with open(language_path, "r", encoding="utf-8") as f:
     language_path = yaml.safe_load(f)
 
-# Путь к файлу mailings.yml
-mailings_path = messages_dir.joinpath("messages", "ru", "handlers_string")
-
-# Загрузить mailings.yml
-with open(mailings_path / "mailings.yml", "r", encoding="utf-8") as f:
-    mailings_path = yaml.safe_load(f)
-
 # Путь к файлу calendar.yml
 calendar_path = messages_dir.joinpath("messages", "ru", "calendar_string")
 
@@ -286,6 +279,9 @@ for key, value in ration_data["ration_info"].items():
         value = value.replace("{{days}}", formatted_days).replace("{{hours}}", formatted_hours).strip()
         ration_data["ration_info"][key] = value
 
+# Получение рациона на эту неделю
+ration_names = ration_data["ration"]["name_ration"]
+
 # Путь к файлу admin.yml
 admin_path = messages_dir.joinpath("messages", "ru", "handlers_string")
 
@@ -327,3 +323,17 @@ role_path = messages_dir.joinpath("messages", "ru", "role_string")
 # Загрузить notices.yml
 with open(role_path / "role.yml", "r", encoding="utf-8") as f:
     role_path = yaml.safe_load(f)
+
+# Путь к файлу mailings.yml
+mailings_path = messages_dir.joinpath("messages", "ru", "handlers_string", "mailings.yml")
+
+# Загрузить mailings.yml
+with open(mailings_path, "r", encoding="utf-8") as f:
+    mailings_data = yaml.safe_load(f)
+
+# Заменяем переменные в YAML-файле с помощью метода safe_load
+for key, value in mailings_data["ration"].items():
+    if isinstance(value, str) and "{{" in value and "}}" in value:
+        # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
+        value = value.replace("{{ration}}", str(ration_names)).replace("{{days}}", formatted_days).replace("{{hours}}", formatted_hours).strip()
+        mailings_data["ration"][key] = value

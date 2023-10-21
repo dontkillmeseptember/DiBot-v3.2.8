@@ -55,3 +55,16 @@ def delete_subscriber(user_id):
         file_path = os.path.join("bin", "db", "subscribers.json")
         with open(file_path, "w") as file:
             json.dump(subscribers_data, file, indent=4)
+
+# Функция для установки ежедневного сброса флага has_visited_sport
+async def daily_reset_has_visited_sport():
+	file_path = os.path.join("bin", "db", "subscribers.json")
+	
+	with open(file_path, "r") as file:
+		subscribers_data = json.load(file)
+	
+	for user_id, user_data in subscribers_data.items():
+		user_data["has_visited_sport"] = False
+	
+	with open(file_path, "w") as file:
+		json.dump(subscribers_data, file, indent=4)

@@ -58,10 +58,10 @@ async def energy_training_menu_handler(message: types.Message):
 				await bot.send_message(message.chat.id, yml_loader.energy_training_data["energy_training_info"], reply_markup=keyboard)
 			elif selected_role == yml_loader.role_path["roles"]["role_dinara"]:
 				keyboard = keyboard_dinara()
-				await bot.send_message(message.chat.id, yml_loader.energy_training_data["energy_training_info"], reply_markup=keyboard)
+				await bot.send_message(message.chat.id, yml_loader.energy_training_data["energy_training_info_story"], reply_markup=keyboard)
 			elif selected_role == yml_loader.admin_path["admin"]["admin_role"]:
 				keyboard = keyboard_admin()
-				await bot.send_message(message.chat.id, yml_loader.energy_training_data["energy_training_info"], reply_markup=keyboard)
+				await bot.send_message(message.chat.id, yml_loader.energy_training_data["energy_training_info_story"], reply_markup=keyboard)
 			elif selected_role == yml_loader.start_bot_path["registor"]["user_role"]:
 				keyboard = keyboard_user()
 				await bot.send_message(message.chat.id, yml_loader.energy_training_data["energy_training_info"], reply_markup=keyboard)

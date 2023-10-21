@@ -20,7 +20,10 @@ def profile_menu():
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.contract_path["contraft_interface"]["button_interface"], callback_data="interface_menu"))
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.role_path["role"]["shift_role"], callback_data="role_menu"))
 	# inline_keyboard.add(InlineKeyboardButton(yml_loader.mailings_path["mailings"]["button_mailings"], callback_data="mailings_menu"))
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.language_path["language"]["button_language"], callback_data="language_menu"))
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.language_path["language"]["button_language"], callback_data="language_menu"),
+		InlineKeyboardButton(yml_loader.sport_data["sport"]["selected_sport"], callback_data="sport_menu")
+	)
 
 	return inline_keyboard
 
@@ -62,6 +65,65 @@ async def profile_command(message: types.Message):
 		await bot.send_photo(chat_id=message.chat.id, photo=photo_file_id, caption=caption, reply_markup=inline_keyboard)
 	else:
 		await bot.send_message(message.chat.id, caption)
+
+# Обработчик вкладки "Сменить упражнение"
+@dp.callback_query_handler(lambda c: c.data == 'sport_menu')
+async def change_sport(callback_query: types.CallbackQuery):
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.language_path["language"]["button_back"], callback_data="back_profile"))
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.sport_data["sport"]["sport_legs"], callback_data="sport_legs_change"),
+		InlineKeyboardButton(yml_loader.sport_data["sport"]["sport_hand"], callback_data="sport_hand_change")
+	)
+
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.sport_data["sport"]["sport_heart"], callback_data="sport_heart_change"))
+
+	await bot.edit_message_caption(caption=yml_loader.sport_data["sport"]["sport_changes"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+# Обработчик выбора упражнения для ноги
+@dp.callback_query_handler(Text(startswith="sport_legs_change"), state="*")
+async def change_sport_legs(callback_query: types.CallbackQuery, state: FSMContext):
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+
+	# Сохранение выбора упражнения в user_data
+	user_data[str(user_id)]["selected_sport"] = yml_loader.sport_data["sport"]["sport_legs"]
+	user_data[str(user_id)]["sport"] = "legs"
+	save_user_data(user_data)
+
+	await bot.answer_callback_query(callback_query.id, text=yml_loader.sport_data["sport"]["text_sport_changes_legs"])
+
+	await profile_end(callback_query, state)
+
+# Обработчик выбора упражнения для руки
+@dp.callback_query_handler(Text(startswith="sport_hand_change"), state="*")
+async def change_sport_hand(callback_query: types.CallbackQuery, state: FSMContext):
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+
+	# Сохранение выбора упражнения в user_data
+	user_data[str(user_id)]["selected_sport"] = yml_loader.sport_data["sport"]["sport_hand"]
+	user_data[str(user_id)]["sport"] = "hand"
+	save_user_data(user_data)
+
+	await bot.answer_callback_query(callback_query.id, text=yml_loader.sport_data["sport"]["text_sport_changes_hand"])
+
+	await profile_end(callback_query, state)
+
+# Обработчик выбора упражнения для пресс
+@dp.callback_query_handler(Text(startswith="sport_heart_change"), state="*")
+async def change_sport_heart(callback_query: types.CallbackQuery, state: FSMContext):
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+
+	# Сохранение выбора упражнения в user_data
+	user_data[str(user_id)]["selected_sport"] = yml_loader.sport_data["sport"]["sport_heart"]
+	user_data[str(user_id)]["sport"] = "heart"
+	save_user_data(user_data)
+
+	await bot.answer_callback_query(callback_query.id, text=yml_loader.sport_data["sport"]["text_sport_changes_heart"])
+
+	await profile_end(callback_query, state)
 
 # Обработчик вкладки "Идентифицировать новую роль"
 @dp.callback_query_handler(lambda c: c.data == 'role_menu')

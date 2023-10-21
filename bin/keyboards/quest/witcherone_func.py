@@ -41,13 +41,23 @@ async def start_the_witcher_one(message: types.Message):
 				await battlepass_quest_nine_message(message)
 			elif selected_quests == "9/60":
 				await battlepass_quest_ten_message(message)
+			elif selected_quests == "10/60":
+				await battlepass_quest_thousand_message(message)
+			elif selected_quests == "11/60":
+				await battlepass_quest_twelve_message(message)
+			elif selected_quests == "12/60":
+				await battlepass_quest_thirteen_message(message)
+			elif selected_quests == "13/60":
+				await battlepass_quest_fourteen_message(message)
+			elif selected_quests == "14/60":
+				await battlepass_quest_fifteen_message(message)
 	else:
 		print("Error")
 
 # Задание #1
 async def battlepass_quest_one(callback_query: types.CallbackQuery):
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_two"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_one"], callback_data="start_two"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_one"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
@@ -61,14 +71,14 @@ async def battlepass_quest_two(callback_query: types.CallbackQuery):
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_three"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_two"], callback_data="start_three"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_two"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
 async def battlepass_quest_two_message(message: types.Message):
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_three"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_two"], callback_data="start_three"))
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_two"], reply_markup=inline_keyboard)
 
@@ -82,14 +92,14 @@ async def battlepass_quest_three(callback_query: types.CallbackQuery):
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_four"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_three"], callback_data="start_four"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_three"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
 async def battlepass_quest_three_message(message: types.Message):
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_four"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_three"], callback_data="start_four"))
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_three"], reply_markup=inline_keyboard)
 
@@ -103,14 +113,14 @@ async def battlepass_quest_four(callback_query: types.CallbackQuery):
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_five"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_four"], callback_data="start_five"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_four"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
 async def battlepass_quest_four_message(message: types.Message):
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_five"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_four"], callback_data="start_five"))
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_four"], reply_markup=inline_keyboard)
 
@@ -124,14 +134,14 @@ async def battlepass_quest_five(callback_query: types.CallbackQuery):
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_six"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_five"], callback_data="start_six"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_five"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
 async def battlepass_quest_five_message(message: types.Message):
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_six"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_five"], callback_data="start_six"))
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_five"], reply_markup=inline_keyboard)
 
@@ -145,14 +155,14 @@ async def battlepass_quest_six(callback_query: types.CallbackQuery):
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_seven"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_six"], callback_data="start_seven"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_six"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
 async def battlepass_quest_six_message(message: types.Message):
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_seven"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_six"], callback_data="start_seven"))
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_six"], reply_markup=inline_keyboard)
 
@@ -166,14 +176,14 @@ async def battlepass_quest_seven(callback_query: types.CallbackQuery):
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_eight"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_seven"], callback_data="start_eight"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_seven"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
 async def battlepass_quest_seven_message(message: types.Message):
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_eight"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_seven"], callback_data="start_eight"))
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_seven"], reply_markup=inline_keyboard)
 
@@ -187,14 +197,14 @@ async def battlepass_quest_eight(callback_query: types.CallbackQuery):
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_nine"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_eight"], callback_data="start_nine"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_eight"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
 async def battlepass_quest_eight_message(message: types.Message):
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_nine"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_eight"], callback_data="start_nine"))
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_eight"], reply_markup=inline_keyboard)
 
@@ -208,14 +218,14 @@ async def battlepass_quest_nine(callback_query: types.CallbackQuery):
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_ten"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_nine"], callback_data="start_ten"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_nine"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
 async def battlepass_quest_nine_message(message: types.Message):
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_ten"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_nine"], callback_data="start_ten"))
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_nine"], reply_markup=inline_keyboard)
 
@@ -229,16 +239,121 @@ async def battlepass_quest_ten(callback_query: types.CallbackQuery):
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_thousand"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_ten"], callback_data="start_thousand"))
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_ten"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
 async def battlepass_quest_ten_message(message: types.Message):
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["quest_buttons"]["contnt"], callback_data="start_thousand"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_ten"], callback_data="start_thousand"))
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_ten"], reply_markup=inline_keyboard)
+
+# Задание #11
+async def battlepass_quest_thousand(callback_query: types.CallbackQuery):
+	# Изменяет прогресс боевого пропуска у пользователя
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+	user_data[str(user_id)]["battlepass"] = "10/60"
+	save_user_data(user_data)
+
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_thousand"], callback_data="start_twelve"))
+
+	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_thousand"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def battlepass_quest_thousand_message(message: types.Message):
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_thousand"], callback_data="start_twelve"))
+
+	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_thousand"], reply_markup=inline_keyboard)
+
+# Задание #12
+async def battlepass_quest_twelve(callback_query: types.CallbackQuery):
+	# Изменяет прогресс боевого пропуска у пользователя
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+	user_data[str(user_id)]["battlepass"] = "11/60"
+	save_user_data(user_data)
+
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_twelve"], callback_data="start_thirteen"))
+
+	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_twelve"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def battlepass_quest_twelve_message(message: types.Message):
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_twelve"], callback_data="start_thirteen"))
+
+	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_twelve"], reply_markup=inline_keyboard)
+
+# Задание #13
+async def battlepass_quest_thirteen(callback_query: types.CallbackQuery):
+	# Изменяет прогресс боевого пропуска у пользователя
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+	user_data[str(user_id)]["battlepass"] = "12/60"
+	save_user_data(user_data)
+
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_thirteen"], callback_data="start_fourteen"))
+
+	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_thirteen"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def battlepass_quest_thirteen_message(message: types.Message):
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_thirteen"], callback_data="start_fourteen"))
+
+	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_thirteen"], reply_markup=inline_keyboard)
+
+# Задание #14
+async def battlepass_quest_fourteen(callback_query: types.CallbackQuery):
+	# Изменяет прогресс боевого пропуска у пользователя
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+	user_data[str(user_id)]["battlepass"] = "13/60"
+	save_user_data(user_data)
+
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_fourteen"], callback_data="start_fifteen"))
+
+	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_fourteen"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def battlepass_quest_fourteen_message(message: types.Message):
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_fourteen"], callback_data="start_fifteen"))
+
+	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_fourteen"], reply_markup=inline_keyboard)
+
+# Задание #15
+async def battlepass_quest_fifteen(callback_query: types.CallbackQuery):
+	# Изменяет прогресс боевого пропуска у пользователя
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+	user_data[str(user_id)]["battlepass"] = "14/60"
+	save_user_data(user_data)
+
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_fifteen"], callback_data="start_sixteen_the_witcher_two"))
+
+	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_fifteen"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def battlepass_quest_fifteen_message(message: types.Message):
+	# Добавляет клавиатуру с кнопкой "Выполнить"
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_fifteen"], callback_data="start_sixteen_the_witcher_two"))
+
+	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_fifteen"], reply_markup=inline_keyboard)
 
 # Обработчики для каждой кнопки
 handlers_battlepass = {
@@ -251,7 +366,12 @@ handlers_battlepass = {
 	"start_seven": battlepass_quest_seven,
 	"start_eight": battlepass_quest_eight,
 	"start_nine": battlepass_quest_nine,
-	"start_ten": battlepass_quest_ten
+	"start_ten": battlepass_quest_ten,
+	"start_thousand": battlepass_quest_thousand,
+	"start_twelve": battlepass_quest_twelve,
+	"start_thirteen": battlepass_quest_thirteen,
+	"start_fourteen": battlepass_quest_fourteen,
+	"start_fifteen": battlepass_quest_fifteen
 }
 
 # Обработчик для кнопок вкладки "В путь!"

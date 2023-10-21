@@ -26,6 +26,9 @@ PHOTO_REWARD = "https://github.com/dontkillmeseptember/DiBot/blob/v4.5.4/content
 # Переменная для хранения фотографии
 PHOTO_PATH_CONTRACT = "https://github.com/dontkillmeseptember/DiBot-v0.0.3/blob/master/content/photo/contract/contraft_tg.jpg?raw=true"
 
+# Переменная для хранения фотографии
+PHOTO_PATH_TEST_IMAGE = "https://github.com/dontkillmeseptember/DiBot/blob/v4.5.4/content/photo/test/test_image.jpg?raw=true"
+
 # Переменная для хранения BOT_TOKEN
 BOT_TOKEN = str(os.getenv("BOT_TOKEN"))
 

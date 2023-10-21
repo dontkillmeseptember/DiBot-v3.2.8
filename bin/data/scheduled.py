@@ -1,5 +1,5 @@
 from misc.util import CronTrigger
-from handlers.users.mailings import send_scheduled_messages, send_scheduled_messages_calendar, send_scheduled_messages_calendar_sad
+from handlers.users.mailings import send_scheduled_messages, send_scheduled_messages_calendar, send_scheduled_messages_calendar_sad, send_scheduled_messages_sport
 
 # Обработчик рассылок для каждого дня неделе, для вкладки "Рацион на неделю"
 job_settings_ration = [
@@ -38,6 +38,14 @@ job_settings_ration = [
         'args': ("sunday",),
         'trigger': CronTrigger(day_of_week='sun', hour=12, minute=30)
     }
+]
+
+# Обработчик для упражнений
+settings_sport = [
+	{
+		'func': send_scheduled_messages_sport,
+		'trigger': CronTrigger(hour=10, minute=30)
+	}
 ]
 
 # Обработчик для каждого праздника

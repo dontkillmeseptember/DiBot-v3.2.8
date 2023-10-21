@@ -46,6 +46,7 @@ async def ration_handler(message: types.Message):
 # Асинхронная функция для обработки недельного запроса о рационе
 async def ration_weekly_callback(message: types.Message):
 	user_id = message.from_user.id
+	
 	file_path = os.path.join("bin", "db", "subscribers.json")
 	
 	with open(file_path, "r") as file:
@@ -66,7 +67,6 @@ async def ration_weekly_callback(message: types.Message):
 	minutes = (time_diff.seconds % 3600) // 60
 
 	# Проверяем, является ли пользователь администратором
-	user_id = message.from_user.id
 	admin_data = load_admin_data()
 
 	if is_admin_in_data(user_id, admin_data):

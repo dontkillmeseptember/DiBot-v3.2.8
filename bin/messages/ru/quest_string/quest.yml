@@ -1,5 +1,5 @@
 quest:
-  button_quest: 🐺📜🗡️ Белый Волк • Летопись Ведьмака
+  button_quest: 🐺 Белый Волк • Летопись Ведьмака 🗡️
   battlepass_info: |
     <b>🐴💬 Добро пожаловать в • Боевой пропуск!</b>
 
@@ -16,7 +16,7 @@ quest:
 
     <b>Для удобства и отслеживания, какие задания есть на главе, можете использовать чеклисты для каждой части.</b>
 
-    <b> • The Witcher 1 — Enhanced Edition</b>
+    <b> • The Witcher 1 — Enhanced Edition by <a href="https://t.me/slavkkkkk">Spurs</a></b>
     <b> ↳ </b> <a href='{{witcherone}}'>Графическая сборка</a><b> •</b>
     <b> ↳ </b> <a href='https://docs.google.com/spreadsheets/d/1Pnd2YPMjmiC5vT_PTxDiOnDYPWHzFhq83VUMXCHlvLg/edit#gid=486885910'>Чеклист</a><b> •</b>
 
@@ -25,11 +25,11 @@ quest:
 
     <b>Для удобства и отслеживания, какие задания есть на главе, можете использовать чеклисты для каждой части.</b>
 
-    <b> • The Witcher 1 — Enhanced Edition</b>
+    <b> • The Witcher 1 — Enhanced Edition by <a href="https://t.me/slavkkkkk">Spurs</a></b>
     <b> ↳ </b> <a href='{{witcherone}}'>Графическая сборка</a><b> •</b>
     <b> ↳ </b> <a href='https://docs.google.com/spreadsheets/d/1Pnd2YPMjmiC5vT_PTxDiOnDYPWHzFhq83VUMXCHlvLg/edit#gid=486885910'>Чеклист</a><b> •</b>
 
-    <b> • The Witcher 2 — Assassins of Kings</b>
+    <b> • The Witcher 2 — Assassins of Kings by <a href="https://t.me/slavkkkkk">Spurs</a></b>
     <b> ↳ </b> <a href='{{witchertwo}}'>Графическая сборка</a><b> •</b>
     <b> ↳ </b> <a href='https://docs.google.com/spreadsheets/d/1uu1PJnOtHTN2efiCBNsEnFOHeub4UPSWOy7YoBLRJCY/edit#gid=757531068'>Чеклист</a><b> •</b>
 
@@ -38,15 +38,15 @@ quest:
 
     <b>Для удобства и отслеживания, какие задания есть на главе, можете использовать чеклисты для каждой части.</b>
 
-    <b> • The Witcher 1 — Enhanced Edition</b>
+    <b> • The Witcher 1 — Enhanced Edition by <a href="https://t.me/slavkkkkk">Spurs</a></b>
     <b> ↳ </b> <a href='{{witcherone}}'>Графическая сборка</a><b> •</b>
     <b> ↳ </b> <a href='https://docs.google.com/spreadsheets/d/1Pnd2YPMjmiC5vT_PTxDiOnDYPWHzFhq83VUMXCHlvLg/edit#gid=486885910'>Чеклист</a><b> •</b>
 
-    <b> • The Witcher 2 — Assassins of Kings</b>
+    <b> • The Witcher 2 — Assassins of Kings by <a href="https://t.me/slavkkkkk">Spurs</a></b>
     <b> ↳ </b> <a href='{{witchertwo}}'>Графическая сборка</a><b> •</b>
     <b> ↳ </b> <a href='https://docs.google.com/spreadsheets/d/1uu1PJnOtHTN2efiCBNsEnFOHeub4UPSWOy7YoBLRJCY/edit#gid=757531068'>Чеклист</a><b> •</b>
 
-    <b> • The Witcher 3 — Wild Hunt</b>
+    <b> • The Witcher 3 — Wild Hunt by <a href="https://t.me/slavkkkkk">Spurs</a></b>
     <b> ↳ </b> <a href='{{witcherthree}}'>Графическая сборка</a><b> •</b>
     <b> ↳ </b> <a href='https://docs.google.com/spreadsheets/d/1AzZo6nFZh1RRBnG29hLcjTBzNGgr-dkZ5xrNkZWCM38/edit#gid=1111470795'>Чеклист</a><b> •</b>
 
@@ -111,7 +111,7 @@ the_witcher_one_quests:
   quest_one: |
     <b>• 🗺️ Начало большего пути! • Задание #1</b>
 
-    <b>🐴💬 Пролог The Witcher 1 — Enhanced Edition представляет собой вводный сюжет, где главный герой, Геральт из Ривии, сталкивается с амнезией и оказывается в крепости Каэр Морхен, где его обучали и превратили в ведьмака. В этой части игры, Геральт тренируется и встречает своих наставников и старых друзей, а также узнает о загадочных атаках на крепость, которые ставят под угрозу его и других ведьмаков.</b>
+    <b>🐴💬 Пролог The Witcher 1 — Enhanced Edition представляет собой вводный сюжет, где главный герой, Геральт из Ривии, сталкивается с амнезией и оказывается в крепости Каэр Морхен, где его обучали и превратили в ведьмака.</b>
 
     <b>• 🎯 Задание:</b>
     <b> ↳ </b> <b>Выполнить — </b><a href='https://vedmak.fandom.com/wiki/%D0%AD%D0%BB%D0%B8%D0%BA%D1%81%D0%B8%D1%80_%D0%B4%D0%BB%D1%8F_%D0%A2%D1%80%D0%B8%D1%81%D1%81'>Эликсир для Трисс</a>
@@ -361,10 +361,13 @@ the_witcher_one_quests:
   quest_fifteen: |
     <b>fifteen fifteen</b>
 
+notification_rewards:
+  unlock_pages: 🐴💬 Вы разблокировали • 2 страницы
+
 quest_buttons:
   info: 🎯 Информация о боевом пропуске
   awards: 🏆 Награды боевого пропуска
-  quest: 🗺️ В путь!
+  quest: 🗺️ В путь
   start: 🏹 Начать приключения
   contnt: 💢 Выполнить
   rewards_one: 🎖 Награды • The Witcher 1

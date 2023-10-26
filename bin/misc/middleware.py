@@ -11,7 +11,7 @@ logger.setLevel(logging.INFO)
 file_handler = logging.FileHandler(log_file_path, encoding='utf-8')  # Используем utf-8 кодировку
 
 # Создайте форматтер для указания формата записей в логах
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+formatter = logging.Formatter('[%(asctime)s] - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
 
 # Добавьте обработчик к логгеру

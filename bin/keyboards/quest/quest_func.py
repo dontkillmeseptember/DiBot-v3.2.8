@@ -17,6 +17,7 @@ def create_quest_keyboard(message):
 	user_id = user.id
 	user_data = check_user_data(user_id)
 	battlepass = user_data.get("battlepass", "Uxknow")
+	quest = user_data.get("quest", "Начать")
 
 	# Создаем клавиатуру с вкладками
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
@@ -24,7 +25,7 @@ def create_quest_keyboard(message):
 		KeyboardButton(yml_loader.quest_data["quest_buttons"]["awards"]),
 		KeyboardButton(yml_loader.quest_data["quest_buttons"]["info"])
 	)
-	keyboard.add(KeyboardButton(yml_loader.quest_data["quest_buttons"]["quest"]))
+	keyboard.add(KeyboardButton(f"🗺️ В путь • {quest}"))
 	keyboard.row(
 		KeyboardButton(yml_loader.main_path["main_menu"]["button_main_menu"]),
 		KeyboardButton(f"📈 Ваш прогресс — {battlepass}")
@@ -37,29 +38,7 @@ async def quest_handler(message: types.Message):
 	# Переменная для кнопок
 	keyboard = create_quest_keyboard(message)
 
-	# Проверяем, является ли пользователь администратором
-	user_id = message.from_user.id
-	admin_data = load_admin_data()
-	
-	if is_admin_in_data(user_id, admin_data):
-		await bot.send_photo(message.chat.id, photo=PHOTO_PATH, caption=yml_loader.quest_data["quest"]["battlepass_info"], reply_markup=keyboard)
-	else:
-		# Получение текущей даты и времени
-		current_datetime = datetime.datetime.now(moscow_tz)
-		target_datetime = datetime.datetime(current_datetime.year, month=10, day=31, hour=0, minute=0, second=0)
-		target_datetime = moscow_tz.localize(target_datetime)
-		
-		time_diff = target_datetime - current_datetime
-		
-		# Рассчитываем оставшееся время до целевой даты и времени
-		days = time_diff.days
-		hours = time_diff.seconds // 3600
-		minutes = (time_diff.seconds % 3600) // 60
-
-		if time_diff.total_seconds() > 0:
-			await bot.send_photo(message.chat.id, photo=PHOTO_PATH_PREVIEW, caption=f"<b>• Боевой пропуск — {yml_loader.quest_data['quest']['button_quest']};\n 	↳ будет доступна через: <code>⌛️ {days}Д {hours}Ч и {minutes}М</code></b>")
-		else:
-			await bot.send_photo(message.chat.id, photo=PHOTO_PATH, caption=yml_loader.quest_data["quest"]["battlepass_info"], reply_markup=keyboard)
+	await bot.send_photo(message.chat.id, photo=PHOTO_PATH, caption=yml_loader.quest_data["quest"]["battlepass_info"], reply_markup=keyboard)
 
 # Обработчик вкладки "В путь!"
 async def start_battlepass(message: types.Message):

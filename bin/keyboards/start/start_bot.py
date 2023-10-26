@@ -44,8 +44,10 @@ async def process_password(message: types.Message, state: FSMContext):
 	user = message.text
 
 	if user == PASSWORD:
+		user = message.from_user
 		user_id = message.from_user.id
 		username = message.from_user.username
+		userlastname = user.first_name
 
 		user_role = yml_loader.start_bot_path["registor"]["user_role"]
 		user_smile = yml_loader.start_bot_path["registor"]["smile_user"]
@@ -56,9 +58,12 @@ async def process_password(message: types.Message, state: FSMContext):
 
 		if not is_user_in_data(user_id, user_data):
 			user_data[str(user_id)] = {"username": username, 
+							  		   "userlastname": userlastname,
 				  					   "role": user_role,
 									   "smile": user_smile,
-				  					   "fines": "0", 
+				  					   "fines": 0,
+									   "fines_slava": 0,
+									   "user_interest": 5,
 				  					   "language": None,
 									   "bot_id": None,
 									   "interface_contract": None,
@@ -146,7 +151,7 @@ async def select_language(callback_query: types.CallbackQuery, state: FSMContext
 		chosen_language = callback_query.data
 
 		if chosen_language in languages:
-			keyboard = create_menu_keyboard()
+			keyboard = create_menu_keyboard(callback_query.message)
 
 			# Генерация случайного 9-значного ID
 			bot_id = ''.join(str(random.randint(0, 9)) for _ in range(9))

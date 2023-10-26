@@ -17,16 +17,6 @@ from data.config import (
     WITCHER_3
 )
 
-from keyboards.holidays_contractual.fines.fines_count import (
-    igor_fines_account, slava_fines_account, 
-    igor_all_fines, slava_all_fines,
-    formated_result_one, full_igor_one,
-    formated_result_two, full_igor_two,
-    formated_result_three, full_igor_three,
-    amount_in_eth, usd_equivalent_formatted,
-    rub_equivalent_formatted
-)
-
 # Получение текущий версии
 bot_version = get_bot_version()
 
@@ -190,31 +180,9 @@ with open(calendar_path / "calendar.yml", "r", encoding="utf-8") as f:
 # Путь к файлу fines.yml
 fines_path = messages_dir.joinpath("messages", "ru", "fines_string", "fines.yml")
 
-# Замена переменных для Игоря
-fines_igor = f"{igor_fines_account}"
-fines_all_igor = f"{igor_all_fines}"
-
-# Замена переменных для Славы
-fines_slava = f"{slava_fines_account}"
-fines_all_slava = f"{slava_all_fines}"
-
 # Загрузить fines.yml
 with open(fines_path, "r", encoding="utf-8") as f:
     fines_data = yaml.safe_load(f)
-
-# Заменяем переменные в YAML-файле с помощью метода safe_load
-for key, value in fines_data["fines_igor"].items():
-    if isinstance(value, str) and "{{" in value and "}}" in value:
-        # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
-        value = value.replace("{{igor}}", str(fines_igor)).replace("{{igorfull}}", str(igor_all_fines)).replace("{{resultone}}", str(formated_result_one)).replace("{{rate_one}}", str(full_igor_one)).replace("{{resulttwo}}", str(formated_result_two)).replace("{{rate_two}}", str(full_igor_two)).replace("{{resultthree}}", str(formated_result_three)).replace("{{rate_three}}", str(full_igor_three)).replace("{{eth}}", str(amount_in_eth)).replace("{{usd}}", str(usd_equivalent_formatted)).replace("{{rub}}", str(rub_equivalent_formatted)).strip()
-        fines_data["fines_igor"][key] = value
-
-# Заменяем переменные в YAML-файле с помощью метода safe_load
-for key, value in fines_data["fines_slava"].items():
-    if isinstance(value, str) and "{{" in value and "}}" in value:
-        # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
-        value = value.replace("{{slava}}", fines_slava).replace("{{slavafull}}", fines_all_slava).strip()
-        fines_data["fines_slava"][key] = value
 
 # Путь к файлу contract.yml
 contract_path = messages_dir.joinpath("messages", "ru", "contract_string")

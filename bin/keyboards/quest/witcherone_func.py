@@ -1,7 +1,7 @@
 from misc.util import InlineKeyboardMarkup, InlineKeyboardButton, types
 from misc.loader import dp, bot
 
-from data.start_db import check_user_data, load_user_data, save_user_data, is_user_in_data
+from data.start_db import load_user_data, save_user_data, is_user_in_data
 from data.config import PHOTO_THE_WITCHER_ONE
 
 from data import yml_loader
@@ -56,6 +56,12 @@ async def start_the_witcher_one(message: types.Message):
 
 # Задание #1
 async def battlepass_quest_one(callback_query: types.CallbackQuery):
+	# Изменяет прогресс боевого пропуска у пользователя
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+	user_data[str(user_id)]["quest"] = "Задание #1"
+	save_user_data(user_data)
+
 	inline_keyboard = InlineKeyboardMarkup()
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_one"], callback_data="start_two"))
 
@@ -67,6 +73,7 @@ async def battlepass_quest_two(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "1/60"
+	user_data[str(user_id)]["quest"] = "Задание #2"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -88,6 +95,7 @@ async def battlepass_quest_three(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "2/60"
+	user_data[str(user_id)]["quest"] = "Задание #3"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -109,6 +117,7 @@ async def battlepass_quest_four(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "3/60"
+	user_data[str(user_id)]["quest"] = "Задание #4"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -130,6 +139,7 @@ async def battlepass_quest_five(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "4/60"
+	user_data[str(user_id)]["quest"] = "Задание #5"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -151,11 +161,14 @@ async def battlepass_quest_six(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "5/60"
+	user_data[str(user_id)]["quest"] = "Задание #6"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_six"], callback_data="start_seven"))
+
+	await bot.answer_callback_query(callback_query.id, text=yml_loader.quest_data["notification_rewards"]["unlock_pages"])
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_six"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
@@ -172,6 +185,7 @@ async def battlepass_quest_seven(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "6/60"
+	user_data[str(user_id)]["quest"] = "Задание #7"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -193,6 +207,7 @@ async def battlepass_quest_eight(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "7/60"
+	user_data[str(user_id)]["quest"] = "Задание #8"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -214,6 +229,7 @@ async def battlepass_quest_nine(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "8/60"
+	user_data[str(user_id)]["quest"] = "Задание #9"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -235,6 +251,7 @@ async def battlepass_quest_ten(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "9/60"
+	user_data[str(user_id)]["quest"] = "Задание #10"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -256,11 +273,14 @@ async def battlepass_quest_thousand(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "10/60"
+	user_data[str(user_id)]["quest"] = "Задание #11"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
 	inline_keyboard = InlineKeyboardMarkup()
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.quest_data["the_witcher_one_quests"]["button_quest_thousand"], callback_data="start_twelve"))
+
+	await bot.answer_callback_query(callback_query.id, text=yml_loader.quest_data["notification_rewards"]["unlock_pages"])
 
 	await bot.edit_message_caption(caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_thousand"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
@@ -277,6 +297,7 @@ async def battlepass_quest_twelve(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "11/60"
+	user_data[str(user_id)]["quest"] = "Задание #12"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -298,6 +319,7 @@ async def battlepass_quest_thirteen(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "12/60"
+	user_data[str(user_id)]["quest"] = "Задание #13"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -319,6 +341,7 @@ async def battlepass_quest_fourteen(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "13/60"
+	user_data[str(user_id)]["quest"] = "Задание #14"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"
@@ -340,6 +363,7 @@ async def battlepass_quest_fifteen(callback_query: types.CallbackQuery):
 	user_id = callback_query.from_user.id
 	user_data = load_user_data()
 	user_data[str(user_id)]["battlepass"] = "14/60"
+	user_data[str(user_id)]["quest"] = "Задание #15"
 	save_user_data(user_data)
 
 	# Добавляет клавиатуру с кнопкой "Выполнить"

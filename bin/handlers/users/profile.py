@@ -4,8 +4,6 @@ from misc.util import InlineKeyboardMarkup, InlineKeyboardButton, types, FSMCont
 from data.start_db import check_user_data, load_user_data, save_user_data
 from data.config import PASSWORD_IGOR, PASSWORD_DINARA, SECRET_PASSWORD 
 
-from keyboards.holidays_contractual.fines.fines_count import rub_equivalent_formatted, usd_equivalent_formatted, amount_in_eth
-
 from data import yml_loader
 
 class LanguageStateTwo(StatesGroup):
@@ -42,11 +40,11 @@ async def profile_command(message: types.Message):
 	# Получаем информацию о пользователе
 	user_data = check_user_data(user_id)
 	role = user_data.get("role", "Uxknow")
-	fines = user_data.get("fines", "Uxknow")
 	bot_id = user_data.get("bot_id", "Uxknow")
 	language = user_data.get("language", "Uxknow")
 	smile = user_data.get("smile", "Uxknow")
 	battlepass = user_data.get("battlepass", "Uxknow")
+	
 
 	caption = f"<b>👩🏻‍🦰💬 Ваша текущая информация о профиле.</b>\n\n" \
 				f"<b> • Ваше имя на текущий момент: {userlastname}</b>\n" \
@@ -55,8 +53,6 @@ async def profile_command(message: types.Message):
 				f"<b> • Ваш bot_id: </b><code>{bot_id}</code>\n" \
 				f"<b> • Ваша роль на данный момент: {smile} {role}</b>\n\n" \
 				f"<b> • Ваш прогресс в боевом пропуске: {battlepass}</b>\n\n" \
-				f"<b> • Ваша общая сумма штрафов: 💷 {fines} </b>₽\n" \
-				f"<b> • Ваш общий бюджет: 💷 {amount_in_eth} ETH — {usd_equivalent_formatted} $ ~ {rub_equivalent_formatted} </b>₽\n\n" \
 				f"<b> • Выбранный язык приложения: {language}</b>\n\n"
 
 	if photo.photos:
@@ -306,7 +302,6 @@ async def profile_end_two(callback_query: types.CallbackQuery, state: FSMContext
 	# Получаем информацию о пользователе
 	user_data = check_user_data(user_id)
 	role = user_data.get("role", "Uxknow")
-	fines = user_data.get("fines", "Uxknow")
 	bot_id = user_data.get("bot_id", "Uxknow")
 	language = user_data.get("language", "Uxknow")
 	smile = user_data.get("smile", "Uxknow")
@@ -319,8 +314,6 @@ async def profile_end_two(callback_query: types.CallbackQuery, state: FSMContext
 				f"<b> • Ваш bot_id: </b><code>{bot_id}</code>\n" \
 				f"<b> • Ваша роль на данный момент: {smile} {role}</b>\n\n" \
 				f"<b> • Ваш прогресс в боевом пропуске: {battlepass}</b>\n\n" \
-				f"<b> • Ваша общая сумма штрафов: 💷 {fines} </b>₽\n" \
-				f"<b> • Ваш общий бюджет: 💷 {amount_in_eth} ETH — {usd_equivalent_formatted} $ ~ {rub_equivalent_formatted} </b>₽\n\n" \
 				f"<b> • Выбранный язык приложения: {language}</b>\n\n"
 				
 	if photo.photos:
@@ -344,7 +337,6 @@ async def profile_end(callback_query: types.CallbackQuery, state: FSMContext):
 	# Получаем информацию о пользователе
 	user_data = check_user_data(user_id)
 	role = user_data.get("role", "Uxknow")
-	fines = user_data.get("fines", "Uxknow")
 	bot_id = user_data.get("bot_id", "Uxknow")
 	language = user_data.get("language", "Uxknow")
 	smile = user_data.get("smile", "Uxknow")
@@ -357,8 +349,6 @@ async def profile_end(callback_query: types.CallbackQuery, state: FSMContext):
 				f"<b> • Ваш bot_id: </b><code>{bot_id}</code>\n" \
 				f"<b> • Ваша роль на данный момент: {smile} {role}</b>\n\n" \
 				f"<b> • Ваш прогресс в боевом пропуске: {battlepass}</b>\n\n" \
-				f"<b> • Ваша общая сумма штрафов: 💷 {fines} </b>₽\n" \
-				f"<b> • Ваш общий бюджет: 💷 {amount_in_eth} ETH — {usd_equivalent_formatted} $ ~ {rub_equivalent_formatted} </b>₽\n\n" \
 				f"<b> • Выбранный язык приложения: {language}</b>\n\n"
 				
 	await bot.edit_message_caption(caption=caption, chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)

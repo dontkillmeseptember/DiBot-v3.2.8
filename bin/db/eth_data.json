@@ -1,0 +1,9 @@
+{
+    "wallet": {
+        "eth": 2.085
+    },
+    "interest_wallet": {
+        "interest_igor": 40,
+        "interest_dinara": 60
+    }
+}

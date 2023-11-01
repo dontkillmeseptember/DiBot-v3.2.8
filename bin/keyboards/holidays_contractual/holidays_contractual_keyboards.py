@@ -14,10 +14,6 @@ from keyboards.holidays_contractual.redslavbank.rsb_func import check_user_rsb
 from keyboards.holidays_contractual.contract.contract_func import contract_handler
 from keyboards.holidays_contractual.calendar.calendar_func import handle_start
 
-# Свяжите функции обработки сообщений с диспетчером
-# Кнопка "Праздники и договор"
-dp.register_message_handler(holidays_contractual_handler, lambda message: message.text == yml_loader.holidays_contractual_data["button_holidays_contractual"])
-
 # Кнопка "RedSlavBank"
 def button_fines(message: types.Message):
 	# Проверяем, является ли пользователь регистрирован
@@ -34,16 +30,23 @@ def button_fines(message: types.Message):
 	else:
 		return 0
 
+def now_date():
+	# Получаем текущую дату и форматируем её
+	current_date = datetime.datetime.now()
+	russian_month = get_russian_month(current_date.month)
+
+	formatted_date = f"{current_date.day} {russian_month}"
+
+	return formatted_date
+
+# Свяжите функции обработки сообщений с диспетчером
+# Кнопка "Праздники и договор"
+dp.register_message_handler(holidays_contractual_handler, lambda message: message.text == yml_loader.holidays_contractual_data["button_holidays_contractual"])
+
 dp.register_message_handler(check_user_rsb, lambda message: message.text == f"📁💳 RedSlavBank • {button_fines(message)} ₽")
 
 # Кнопка "Договор"
 dp.register_message_handler(contract_handler, lambda message: message.text == yml_loader.contract_path["contract"]["button_contract"])
 
 # Кнопка "Календарь"
-# Получаем текущую дату и форматируем её
-current_date = datetime.datetime.now()
-russian_month = get_russian_month(current_date.month)
-
-formatted_date = f"{current_date.day} {russian_month}"
-
-dp.register_message_handler(handle_start, lambda message: message.text == f"📁📅 Календарь • {formatted_date}")
+dp.register_message_handler(handle_start, lambda message: message.text == f"📁📅 Календарь • {now_date}")

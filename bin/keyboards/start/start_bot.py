@@ -1,7 +1,7 @@
 from misc.util import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, types, State, StatesGroup, FSMContext, logging, asyncio, random
 from misc.loader import dp, bot
 
-from data.config import PASSWORD, PHOTO_START, PHOTO_PATH_TEST_IMAGE
+from data.config import PASSWORD, PHOTO_START
 from data.start_db import load_user_data, is_user_in_data, save_user_data
 from data.version_db import get_bot_version
 
@@ -33,7 +33,7 @@ async def start_bot(message: types.Message):
 	if is_user_in_data(user_id, user_data):
 		# Переменная для клавиатуры
 		keyboard = create_menu_keyboard(message)
-		await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_PATH_TEST_IMAGE, caption=yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)	
+		await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_START, caption=yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)	
 	else:
 		await message.answer(yml_loader.start_bot_path["registor"]["registor_info"])
 
@@ -113,7 +113,7 @@ async def language_decision(message: types.Message, state: FSMContext):
 		
 		await asyncio.sleep(5)
 
-		await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_PATH_TEST_IMAGE, caption=yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)
+		await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_START, caption=yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)
 
 		await state.finish()
 
@@ -177,7 +177,7 @@ async def select_language(callback_query: types.CallbackQuery, state: FSMContext
 		
 			await asyncio.sleep(5)
 
-			await bot.send_photo(chat_id=callback_query.message.chat.id, photo=PHOTO_PATH_TEST_IMAGE, caption=yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)
+			await bot.send_photo(chat_id=callback_query.message.chat.id, photo=PHOTO_START, caption=yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)
 
 			await state.finish()
 

@@ -1,10 +1,10 @@
 from misc.util import ReplyKeyboardMarkup, KeyboardButton, types, datetime, InlineKeyboardMarkup, InlineKeyboardButton
-from misc.loader import bot, moscow_tz, dp
+from misc.loader import bot, dp
 
 from data import yml_loader
 from data.start_db import check_user_data, load_user_data, is_user_in_data
 
-from data.config import PHOTO_PATH, PHOTO_PATH_PREVIEW, PHOTO_REWARD
+from data.config import PHOTO_PATH, PHOTO_REWARD
 
 from keyboards.quest.witcherone_func import start_the_witcher_one
 from keyboards.quest.witchertwo_func import start_the_witcher_two

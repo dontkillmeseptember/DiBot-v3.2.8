@@ -1,66 +1,145 @@
-from misc.util import InlineKeyboardMarkup, InlineKeyboardButton, types, FSMContext, Text
+from misc.util import InlineKeyboardMarkup, InlineKeyboardButton, types, State, StatesGroup, FSMContext, asyncio, random
 from misc.loader import dp, bot
 
-from data.start_db import load_user_data, is_user_in_data, save_user_data
 from data import yml_loader
 
-from keyboards.holidays_contractual.contract.contract_old_func import contract_start_old_interface, contract_start_old_interface_select
-from keyboards.holidays_contractual.contract.contract_new_func import contract_start_new_interface, contract_start_new_interface_select
+from data.config import PHOTO_PATH_CONTRACT
 
-# Обработчик для кнопок вкладки "Договор"
+# Обработчик для контракта
 async def contract_handler(message: types.Message):
-	user_id = message.from_user.id
-	user_data = load_user_data()
-
-	if is_user_in_data(user_id, user_data):
-		# Проверяем, есть ли уже выбранный интерфейс у пользователя
-		if str(user_id) in user_data and "interface_contract" in user_data[str(user_id)]:
-			selected_interface = user_data[str(user_id)]["interface_contract"]
-			
-			if selected_interface == "old_interface":
-				await contract_start_old_interface_select(message)
-			elif selected_interface == "new_interface":
-				await contract_start_new_interface_select(message)
-			elif selected_interface is None:
-				await contract_start_no_interface(message)
-
-	else:
-		print("User not registor.")
-
-# Обработчик если пользователь не выбрал интерфейс
-async def contract_start_no_interface(message: types.Message):
+	"""Создаем инлайн клавиатуру"""
 	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_igor"], callback_data="contract_igor"))
+
+	await bot.send_photo(message.chat.id, photo=PHOTO_PATH_CONTRACT, caption=yml_loader.contract_path["contract"]["info"], reply_markup=inline_keyboard)
+
+async def contract_igor(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
 	inline_keyboard.row(
-		InlineKeyboardButton(yml_loader.contract_path["contraft_interface"]["old_interface"], callback_data="old_interface"),
-		InlineKeyboardButton(yml_loader.contract_path["contraft_interface"]["new_interface"], callback_data="new_interface")
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_end"], callback_data="forward_new10"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_next"], callback_data="forward_new")
 	)
 
-	await message.answer(yml_loader.contract_path["contraft_interface"]["interface_info"], reply_markup=inline_keyboard)
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_one"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
-# Обработчик для выбора старого интерфейса
-@dp.callback_query_handler(Text(startswith="old_interface"), state="*")
-async def save_old_interface(callback_query: types.CallbackQuery, state: FSMContext):
-	user_id = callback_query.from_user.id
-	user_data = load_user_data()
+async def process_callback_forward_new(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_back"], callback_data="backward_new"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_next"], callback_data="forward_new1")
+	)
 
-	# Сохранение выбора интерфейса в user_data
-	user_data[str(user_id)]["interface_contract"] = "old_interface"
-	save_user_data(user_data)
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_two"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
-	await bot.answer_callback_query(callback_query.id, text=yml_loader.contract_path["contraft_interface"]["text_old_interface"])
-	
-	await contract_start_old_interface(callback_query)
+async def process_callback_forward_new1(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_back"], callback_data="backward_new1"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_next"], callback_data="forward_new2")
+	)
 
-# Обработчик для выбора нового интерфейса
-@dp.callback_query_handler(Text(startswith="new_interface"), state="*")
-async def save_new_interface(callback_query: types.CallbackQuery, state: FSMContext):
-	user_id = callback_query.from_user.id
-	user_data = load_user_data()
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_three"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
-	# Сохранение выбора интерфейса в user_data
-	user_data[str(user_id)]["interface_contract"] = "new_interface"
-	save_user_data(user_data)
+async def process_callback_forward_new2(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_back"], callback_data="backward_new2"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_next"], callback_data="forward_new3")
+	)
 
-	await bot.answer_callback_query(callback_query.id, text=yml_loader.contract_path["contraft_interface"]["text_new_interface"])
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_four"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
 
-	await contract_start_new_interface(callback_query)
+async def process_callback_forward_new3(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_back"], callback_data="backward_new3"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_next"], callback_data="forward_new4")
+	)
+
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_five"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def process_callback_forward_new4(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_back"], callback_data="backward_new4"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_next"], callback_data="forward_new5")
+	)
+
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_six"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def process_callback_forward_new5(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_back"], callback_data="backward_new5"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_next"], callback_data="forward_new6")
+	)
+
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_seven"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def process_callback_forward_new6(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_back"], callback_data="backward_new6"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_next"], callback_data="forward_new7")
+	)
+
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_eight"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def process_callback_forward_new7(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_back"], callback_data="backward_new7"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_next"], callback_data="forward_new8")
+	)
+
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_nine"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+async def process_callback_forward_new8(callback_query: types.CallbackQuery):
+	"""Создаем инлайн клавиатуру"""
+	inline_keyboard = InlineKeyboardMarkup(row_width=2)
+	inline_keyboard.row(
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_back"], callback_data="backward_new8"),
+		InlineKeyboardButton(yml_loader.contract_path["buttons"]["button_start"], callback_data="forward_new9")
+	)
+
+	await bot.edit_message_caption(caption=yml_loader.contract_path["contract_igor"]["contract_ten"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
+
+# Обработчики для каждой кнопки
+handlers = {
+	"contract_igor": contract_igor,
+	"forward_new": process_callback_forward_new,
+	"forward_new1": process_callback_forward_new1,
+	"forward_new2": process_callback_forward_new2,
+	"forward_new3": process_callback_forward_new3,
+	"forward_new4": process_callback_forward_new4,
+	"forward_new5": process_callback_forward_new5,
+	"forward_new6": process_callback_forward_new6,
+	"forward_new7": process_callback_forward_new7,
+	"forward_new8": process_callback_forward_new8,
+	"forward_new9": contract_igor,
+	"forward_new10": process_callback_forward_new8,
+	"backward_new": contract_igor,
+	"backward_new1": process_callback_forward_new,
+	"backward_new2": process_callback_forward_new1,
+	"backward_new3": process_callback_forward_new2,
+	"backward_new4": process_callback_forward_new3,
+	"backward_new5": process_callback_forward_new4,
+	"backward_new6": process_callback_forward_new5,
+	"backward_new7": process_callback_forward_new6,
+	"backward_new8": process_callback_forward_new7
+}
+
+# Обработчик для кнопок вкладки "Договор"
+@dp.callback_query_handler(lambda query: query.data in handlers)
+async def contract_callback_handler(callback_query: types.CallbackQuery):
+	handler_func = handlers[callback_query.data]
+	await handler_func(callback_query)

@@ -16,7 +16,6 @@ class RegistrationState(StatesGroup):
 def profile_menu():
 	inline_keyboard = InlineKeyboardMarkup()
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.role_path["role"]["shift_role"], callback_data="role_menu"))
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.contract_path["contraft_interface"]["button_interface"], callback_data="interface_menu"))
 	# inline_keyboard.add(InlineKeyboardButton(yml_loader.mailings_path["mailings"]["button_mailings"], callback_data="mailings_menu"))
 	inline_keyboard.row(
 		InlineKeyboardButton(yml_loader.language_path["language"]["button_language"], callback_data="language_menu"),
@@ -196,46 +195,6 @@ async def process_password_role(callback_query: types.CallbackQuery, state: FSMC
 
 	else:
 		await bot.send_message(callback_query.from_user.id, yml_loader.admin_path["admin"]["error_password"])
-
-# Обработчик вкладки "Сменить интерфейс договора"
-@dp.callback_query_handler(lambda c: c.data == 'interface_menu')
-async def interface_handler(callback_query: types.CallbackQuery):
-	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.language_path["language"]["button_back"], callback_data="back_profile"))
-	inline_keyboard.row(
-		InlineKeyboardButton(yml_loader.contract_path["contraft_interface"]["old_interface"], callback_data="interface_profile_old"),
-		InlineKeyboardButton(yml_loader.contract_path["contraft_interface"]["new_interface"], callback_data="interface_profile_new")
-	)
-
-	await bot.edit_message_caption(caption=yml_loader.contract_path["contraft_interface"]["interface_info"], chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id, reply_markup=inline_keyboard)
-
-# Обработчик для выбора старого интерфейса
-@dp.callback_query_handler(Text(startswith="interface_profile_old"), state="*")
-async def save_old_interface(callback_query: types.CallbackQuery, state: FSMContext):
-	user_id = callback_query.from_user.id
-	user_data = load_user_data()
-
-	# Сохранение выбора интерфейса в user_data
-	user_data[str(user_id)]["interface_contract"] = "old_interface"
-	save_user_data(user_data)
-
-	await bot.answer_callback_query(callback_query.id, text=yml_loader.contract_path["contraft_interface"]["text_old_interface"])
-
-	await profile_end(callback_query, state)
-
-# Обработчик для выбора нового интерфейса
-@dp.callback_query_handler(Text(startswith="interface_profile_new"), state="*")
-async def save_new_interface(callback_query: types.CallbackQuery, state: FSMContext):
-	user_id = callback_query.from_user.id
-	user_data = load_user_data()
-
-	# Сохранение выбора интерфейса в user_data
-	user_data[str(user_id)]["interface_contract"] = "new_interface"
-	save_user_data(user_data)
-
-	await bot.answer_callback_query(callback_query.id, text=yml_loader.contract_path["contraft_interface"]["text_new_interface"])
-
-	await profile_end(callback_query, state)
 
 # Обработчик вкладки "Смена языка"
 @dp.callback_query_handler(lambda c: c.data == 'language_menu')

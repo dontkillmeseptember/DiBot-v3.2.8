@@ -1,0 +1,23 @@
+{
+    "5840546070": {
+        "username_rsb": "Вячеслав",
+        "userpassword_rsb": "Slava2001",
+        "usercard_rsb": "2396 6266 7567 4285",
+        "remember_password": true,
+        "userchangepassword_rsb": false
+    },
+    "5468836383": {
+        "username_rsb": "Spurs",
+        "userpassword_rsb": "Sasha0117",
+        "usercard_rsb": "4314 9201 0525 5292",
+        "remember_password": true,
+        "userchangepassword_rsb": false
+    },
+    "933807848": {
+        "username_rsb": "Вячеслав",
+        "userpassword_rsb": "Sasha0117",
+        "usercard_rsb": "1430 9158 5585 0408",
+        "remember_password": false,
+        "userchangepassword_rsb": false
+    }
+}

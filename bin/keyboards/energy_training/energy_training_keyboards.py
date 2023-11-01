@@ -8,6 +8,7 @@ from keyboards.energy_training.news.news_func import news_handler
 from keyboards.energy_training.cooking.cooking_func import cooking_handler
 
 from keyboards.energy_training.news_igor.news_igor_func import news_igor_handler
+from keyboards.energy_training.basket.basket_func import basket_handler
 
 # Свяжите функции обработки сообщений с диспетчером
 # Кнопка "Праздники и договор"
@@ -24,3 +25,6 @@ dp.register_message_handler(news_igor_handler, lambda message: message.text == y
 
 # Кнопка "Кулинарная лихорадка"
 dp.register_message_handler(cooking_handler, lambda message: message.text == yml_loader.cooking_data["cooking"]["button_cooking"])
+
+# Кнопка "Корзина товаров"
+dp.register_message_handler(basket_handler, lambda message: message.text == "📁🥼 Корзина Товаров [БЕТА-ТЕСТ]")

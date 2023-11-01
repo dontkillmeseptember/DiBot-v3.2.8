@@ -68,11 +68,19 @@ async def month_october_23_handler(callback_query: types.CallbackQuery):
 
 @dp.callback_query_handler(lambda query: query.data == "forward_3_3")
 async def process_callback_forward_october_23(callback_query: types.CallbackQuery):
-	await process_callback_forward(callback_query, 3, 3)
+	await process_callback_forward_keyboards(callback_query, 3, 3)
 
 @dp.callback_query_handler(lambda query: query.data == "backward_3_3")
 async def process_callback_backward_october_23(callback_query: types.CallbackQuery):
 	await process_callback_backward(callback_query, 3, 3)
+
+@dp.callback_query_handler(lambda query: query.data == "forward_3_3_two")
+async def process_callback_forward_october_23(callback_query: types.CallbackQuery):
+	await process_callback_forward_two(callback_query, 3, 3)
+
+@dp.callback_query_handler(lambda query: query.data == "backward_3_3_two")
+async def process_callback_backward_october_23(callback_query: types.CallbackQuery):
+	await process_callback_forward_keyboards(callback_query, 3, 3)
 
 # Обработчик для кнопки "Сообщение за 16.10.2023"
 async def month_october_16_handler(callback_query: types.CallbackQuery):

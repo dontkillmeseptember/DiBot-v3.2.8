@@ -6,6 +6,8 @@ from data.config import PHOTO_THE_WITCHER_ONE
 
 from data import yml_loader
 
+from keyboards.quest.witchertwo_func import start_the_witcher_two_call
+
 # Обработчик первой части ведьмака
 async def start_the_witcher_one(message: types.Message):
 	user_id = message.from_user.id
@@ -379,6 +381,18 @@ async def battlepass_quest_fifteen_message(message: types.Message):
 
 	await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_THE_WITCHER_ONE, caption=yml_loader.quest_data["the_witcher_one_quests"]["quest_fifteen"], reply_markup=inline_keyboard)
 
+# Переход на вторую часть ведьмака
+async def lets_go_the_witcher_two(callback_query: types.CallbackQuery):
+	# Изменяет прогресс боевого пропуска у пользователя
+	user_id = callback_query.from_user.id
+	user_data = load_user_data()
+	user_data[str(user_id)]["active_chapter"] = "the_witcher_two"
+	save_user_data(user_data)
+
+	await bot.answer_callback_query(callback_query.id, text=yml_loader.quest_data["notification_rewards"]["unlock_pages"])
+
+	await start_the_witcher_two_call(callback_query)
+
 # Обработчики для каждой кнопки
 handlers_battlepass = {
 	"start_one": battlepass_quest_one,
@@ -395,7 +409,8 @@ handlers_battlepass = {
 	"start_twelve": battlepass_quest_twelve,
 	"start_thirteen": battlepass_quest_thirteen,
 	"start_fourteen": battlepass_quest_fourteen,
-	"start_fifteen": battlepass_quest_fifteen
+	"start_fifteen": battlepass_quest_fifteen,
+	"start_sixteen_the_witcher_two": lets_go_the_witcher_two
 }
 
 # Обработчик для кнопок вкладки "В путь!"

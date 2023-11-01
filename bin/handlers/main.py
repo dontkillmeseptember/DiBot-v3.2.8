@@ -8,6 +8,7 @@ from handlers.users.profile import profile_command
 from handlers.admin.login import on_admin_command, on_delete_admin_command
 from handlers.admin.notices import send_nt_message_command
 from handlers.admin.fines import add_fines_command
+from handlers.admin.basket import add_bs_command
 
 # Функция для команд пользователей
 async def all_users(message: types.Message):
@@ -22,3 +23,4 @@ async def all_admin(message: types.Message):
 	await on_delete_admin_command(message)
 	await send_nt_message_command(message)
 	await add_fines_command(message)
+	await add_bs_command(message)

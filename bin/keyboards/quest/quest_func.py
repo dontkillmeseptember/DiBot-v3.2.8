@@ -2,7 +2,6 @@ from misc.util import ReplyKeyboardMarkup, KeyboardButton, types, datetime, Inli
 from misc.loader import bot, moscow_tz, dp
 
 from data import yml_loader
-from data.admin_db import is_admin_in_data, load_admin_data
 from data.start_db import check_user_data, load_user_data, is_user_in_data
 
 from data.config import PHOTO_PATH, PHOTO_PATH_PREVIEW, PHOTO_REWARD

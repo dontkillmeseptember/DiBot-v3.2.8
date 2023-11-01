@@ -9,7 +9,7 @@ def keyboard_igor():
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 	keyboard.add(KeyboardButton(yml_loader.cooking_data["cooking"]["button_cooking"]), KeyboardButton(yml_loader.sport_data["sport"]["button_sport"]))
 	keyboard.add(KeyboardButton(yml_loader.news_path["news"]["button_news"]))
-	keyboard.add(KeyboardButton(yml_loader.main_path["main_menu"]["button_main_menu"]))
+	keyboard.add(KeyboardButton(yml_loader.main_path["main_menu"]["button_main_menu"]), KeyboardButton("📁🥼 Корзина Товаров [БЕТА-ТЕСТ]"))
 
 	return keyboard
 
@@ -18,7 +18,7 @@ def keyboard_dinara():
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 	keyboard.add(KeyboardButton(yml_loader.cooking_data["cooking"]["button_cooking"]), KeyboardButton(yml_loader.sport_data["sport"]["button_sport"]))
 	keyboard.add(KeyboardButton(yml_loader.news_igor_path["news_igor"]["button_news_igor"]))
-	keyboard.add(KeyboardButton(yml_loader.main_path["main_menu"]["button_main_menu"]))
+	keyboard.add(KeyboardButton(yml_loader.main_path["main_menu"]["button_main_menu"]), KeyboardButton("📁🥼 Корзина Товаров [БЕТА-ТЕСТ]"))
 
 	return keyboard
 
@@ -31,7 +31,7 @@ def keyboard_admin():
 		KeyboardButton(yml_loader.news_life_path["news_life"]["button_news_life"]),
 		KeyboardButton(yml_loader.news_igor_path["news_igor"]["button_news_igor"])
 	)
-	keyboard.add(KeyboardButton(yml_loader.main_path["main_menu"]["button_main_menu"]))
+	keyboard.add(KeyboardButton(yml_loader.main_path["main_menu"]["button_main_menu"]), KeyboardButton("📁🥼 Корзина Товаров [БЕТА-ТЕСТ]"))
 
 	return keyboard
 

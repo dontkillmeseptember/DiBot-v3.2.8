@@ -28,7 +28,7 @@ def create_menu_keyboard(message: types.Message):
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 	keyboard.row(
 		KeyboardButton(yml_loader.energy_training_data["button_energy_training"]), 
-		KeyboardButton(yml_loader.holidays_contractual_path["button_holidays_contractual"])
+		KeyboardButton(yml_loader.holidays_contractual_data["button_holidays_contractual"])
 	)
 	keyboard.add(KeyboardButton(f"🐺 Белый Волк • Летопись Ведьмака • {days}Д {hours}Ч 🗡️"))
 	keyboard.row(

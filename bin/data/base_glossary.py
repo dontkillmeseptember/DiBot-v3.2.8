@@ -1,6 +1,14 @@
 from misc.util import InlineKeyboardMarkup, InlineKeyboardButton
 from data import yml_loader
 
+# Функция для получения русского названия месяца
+def get_russian_month(month):
+    months = [
+        'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня',
+        'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
+    ]
+    return months[month - 1]  # Месяцы в Python начинаются с 1
+
 # Список названий месяцев на русском языке
 MONTH_NAMES_RU = [
     yml_loader.calendar_path["months"]["january"], yml_loader.calendar_path["months"]["february"], 

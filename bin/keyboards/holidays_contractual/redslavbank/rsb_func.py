@@ -122,35 +122,38 @@ async def check_user_rsb(message: types.Message, state: FSMContext):
 		user_data = check_rsb_data(user_id)
 		user_remember_password_rsb = user_data.get("remember_password")
 
-		if user_remember_password_rsb == True:
-			await private_office(message, state)
-		elif user_remember_password_rsb == False:
-			user_data = check_rsb_data(user_id)
-			user_name_rsb = user_data.get("username_rsb", "Пользователь")
+		try:
+			if user_remember_password_rsb == True:
+				await private_office(message, state)
+			elif user_remember_password_rsb == False:
+				user_data = check_rsb_data(user_id)
+				user_name_rsb = user_data.get("username_rsb", "Пользователь")
 
-			"""Определяем время суток в данный момент у пользователя"""
-			import datetime
-			now = datetime.datetime.now()
-			current_hour = now.hour
+				"""Определяем время суток в данный момент у пользователя"""
+				import datetime
+				now = datetime.datetime.now()
+				current_hour = now.hour
 
-			if 6 <= current_hour < 12:
-				greeting = "Доброе утро"
-				greeting_smile = "🌄"
-			elif 12 <= current_hour < 18:
-				greeting = "Добрый день"
-				greeting_smile = "🏞"
-			elif 18 <= current_hour < 24:
-				greeting = "Добрый вечер"
-				greeting_smile = "🌅"
-			else:
-				greeting = "Доброй ночи"
-				greeting_smile = "🌌"
+				if 6 <= current_hour < 12:
+					greeting = "Доброе утро"
+					greeting_smile = "🌄"
+				elif 12 <= current_hour < 18:
+					greeting = "Добрый день"
+					greeting_smile = "🏞"
+				elif 18 <= current_hour < 24:
+					greeting = "Добрый вечер"
+					greeting_smile = "🌅"
+				else:
+					greeting = "Доброй ночи"
+					greeting_smile = "🌌"
 
-			await message.answer(f"<b>👩🏻‍🦰💬 {greeting}, {user_name_rsb} • {greeting_smile}\n\n</b>"
-								"<b>Пожалуйста, введите ваш пароль для доступа к вашей учетной записи банка.</b>")
+				await message.answer(f"<b>👩🏻‍🦰💬 {greeting}, {user_name_rsb} • {greeting_smile}\n\n</b>"
+									"<b>Пожалуйста, введите ваш пароль для доступа к вашей учетной записи банка.</b>")
 
-			"""Запрос на подтвеждение пароля пользователя когда он уже зарегистрировался в банке."""
-			await RegistrationState.waiting_for_user_password_rsb.set()
+				"""Запрос на подтвеждение пароля пользователя когда он уже зарегистрировался в банке."""
+				await RegistrationState.waiting_for_user_password_rsb.set()
+		except Exception:
+			await message.answer("<b>👩🏻‍🦰💬 Извините, но кажется, что приложение банка временно недоступно. Пожалуйста, подождите немного, мы работаем над устранением неполадок.\n\nМы приносим извинения за временные неудобства и постараемся восстановить доступ к сервису как можно скорее.\n\nСпасибо за ваше терпение. 🤍</b>")
 	else:
 		await message.answer(f"<b>👩🏻‍🦰💬 {userlastname} Добро пожаловать во вкладку • 📁💳 RedSlavBank\n\n</b>"
 					   		 "<b>RedSlavBank — это ваш надежный партнер в мире финансов. Мы готовы предоставить вам широкий спектр банковских услуг и возможностей для достижения ваших финансовых целей.\n\n</b>"

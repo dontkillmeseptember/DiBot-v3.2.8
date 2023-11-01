@@ -16,8 +16,8 @@ async def on_startup(dp, message):
 
 # Функция для запуска ежедневного сброса флага has_visited_ration в полночь
 async def daily_reset_job():
-    await daily_reset_has_visited_ration()
-    await daily_reset_has_visited_sport()
+	await daily_reset_has_visited_ration()
+	await daily_reset_has_visited_sport()
 
 # Добавляем задачи в планировщик
 for job_setting in job_settings_ration:
@@ -25,10 +25,10 @@ for job_setting in job_settings_ration:
 
 # Добавляем задачи в планировщик
 for calendar in settings_calendar:
-    scheduler.add_job(**calendar)
+	scheduler.add_job(**calendar)
 
 for sport_mallings in settings_sport:
-     scheduler.add_job(**sport_mallings)
+	 scheduler.add_job(**sport_mallings)
 
 # Устанавливаем задачу для ежедневного сброса флага в полночь
 scheduler.add_job(daily_reset_job, "cron", hour=0)
@@ -36,5 +36,5 @@ scheduler.add_job(daily_reset_job, "cron", hour=0)
 scheduler.start()
 
 if __name__ == '__main__':
-    from aiogram import executor
-    executor.start_polling(dp, skip_updates=True)
+	from aiogram import executor
+	executor.start_polling(dp, skip_updates=True)

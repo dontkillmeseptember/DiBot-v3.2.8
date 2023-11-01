@@ -15,8 +15,8 @@ class RegistrationState(StatesGroup):
 # Обработчик функции для inline_keyboards
 def profile_menu():
 	inline_keyboard = InlineKeyboardMarkup()
-	inline_keyboard.add(InlineKeyboardButton(yml_loader.contract_path["contraft_interface"]["button_interface"], callback_data="interface_menu"))
 	inline_keyboard.add(InlineKeyboardButton(yml_loader.role_path["role"]["shift_role"], callback_data="role_menu"))
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.contract_path["contraft_interface"]["button_interface"], callback_data="interface_menu"))
 	# inline_keyboard.add(InlineKeyboardButton(yml_loader.mailings_path["mailings"]["button_mailings"], callback_data="mailings_menu"))
 	inline_keyboard.row(
 		InlineKeyboardButton(yml_loader.language_path["language"]["button_language"], callback_data="language_menu"),

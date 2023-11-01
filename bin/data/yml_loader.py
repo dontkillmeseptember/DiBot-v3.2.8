@@ -20,6 +20,19 @@ from data.config import (
 # Получение текущий версии
 bot_version = get_bot_version()
 
+# Для вкладки свод законов
+now = datetime.datetime.now()
+
+if now.day < 25:
+    delta = datetime.datetime(now.year, now.month, 25) - now
+else:
+    next_month = now.month + 1 if now.month < 12 else 1
+    next_year = now.year + 1 if now.month == 12 else now.year
+    delta = datetime.datetime(next_year, next_month, 25) - now
+
+days_until_25th = delta.days
+hours_until_25th, seconds = divmod(delta.seconds, 3600)
+
 # Для всех вкладок
 # Получаем текущее время в указанной временной зоне
 current_datetime = datetime.datetime.now(moscow_tz)
@@ -87,11 +100,18 @@ for key, value in energy_training_data.items():
         energy_training_data[key] = value
 
 # Путь к файлу holidays_contractual.yml
-holidays_contractual_path = messages_dir.joinpath("messages", "ru", "keyboards_string")
+holidays_contractual_path = messages_dir.joinpath("messages", "ru", "keyboards_string", "holidays_contractual.yml")
 
-# Загрузить holidays_contractual.yml
-with open(holidays_contractual_path / "holidays_contractual.yml", "r", encoding="utf-8") as f:
-    holidays_contractual_path = yaml.safe_load(f)
+# Загрузить energy_training.yml
+with open(holidays_contractual_path, "r", encoding="utf-8") as f:
+    holidays_contractual_data = yaml.safe_load(f)
+
+# Заменяем переменные в YAML-файле с помощью метода safe_load
+for key, value in holidays_contractual_data.items():
+    if isinstance(value, str) and "{{" in value and "}}" in value:
+        # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
+        value = value.replace("{{days}}", str(days_until_25th)).replace("{{hours}}", str(hours_until_25th)).strip()
+        holidays_contractual_data[key] = value
 
 # Путь к файлу quest.yml
 quest_path = messages_dir.joinpath("messages", "ru", "quest_string", "quest.yml")

@@ -172,14 +172,14 @@ def calculate_interest(message: types.Message):
 	budget = rub_formatted_calculate()
 
 	try:
-		interest = float(interest)
+		interest = int(interest)
 
 		if fines > 0:
 			result = fines * interest / 100
 
 			return result
 		else:
-			budget_int = float(budget)
+			budget_int = int(budget)
 
 			interest_budget = interest / 2
 			result_budget = budget_int * interest_budget / 100

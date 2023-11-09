@@ -6,7 +6,8 @@ from keyboards.version.version_func import (
     version_handler,
     update_zero_zero_one_handler,
     update_zero_zero_two_handler,
-    update_zero_zero_three_handler
+    update_zero_zero_three_handler,
+	update_four_five_four_handler
 )
 
 # Кнопка "Обновления бота"
@@ -20,3 +21,6 @@ dp.register_message_handler(update_zero_zero_two_handler, lambda message: messag
 
 # Кнопка "Обновление за 17.07.2023"
 dp.register_message_handler(update_zero_zero_one_handler, lambda message: message.text == yml_loader.version_data["version_0_0_1"]["button_update_jule_zero_zero_one"])
+
+# Кнопка "Обновление за 31.10.2023"
+dp.register_message_handler(update_four_five_four_handler, lambda message: message.text == yml_loader.version_data["versions"]["button_update_4.5.4"])

@@ -7,7 +7,7 @@ class SearchState(StatesGroup):
 	waiting_search_bs = State()
 
 # Обработчик функции для корзины товаров
-async def basket_handler(message: types.Message):
+async def basket_handler(message: types.Message, state: FSMContext):
 	"""Создаем инлайкн клавиатуру для поиска"""
 	inline_keyboard = InlineKeyboardMarkup()
 	inline_keyboard.add(InlineKeyboardButton("🔍 Начать поиск товаров", callback_data="search"))
@@ -22,6 +22,8 @@ async def basket_handler(message: types.Message):
 					 f"<b>Мы готовы помочь вам с вашими покупками!</b>"
 
 	await message.answer(message_basket, reply_markup=inline_keyboard)
+
+	await state.finish()
 
 # Обработчик кнопки "Начать поиск товаров"
 @dp.callback_query_handler(lambda c: c.data == 'search')
@@ -57,7 +59,7 @@ async def search_handler(callback_query: types.CallbackQuery):
 		logging.exception("ERROR: 404 - BASKET_FUNC: FUNC - SEARCH_HANDLER")
 
 @dp.message_handler(state=SearchState.waiting_search_bs)
-async def commodity(message: types.Message, state: FSMContext):
+async def commodity(message: types.Message):
 	"""Пользователь вводит артикул"""
 	user_message_art = message.text
 
@@ -89,8 +91,6 @@ async def commodity(message: types.Message, state: FSMContext):
 					   f"<b>Если вам нужно найти еще один товар, вы можете ввести новый артикул и продолжить поиск.</b>"
 
 		await bot.send_photo(chat_id=message.chat.id, photo=f"{URL_ph}", caption=message_text, reply_markup=inline_keyboard)
-
-		await state.finish()
 	else:
 		await message.answer(f"👩🏻‍🦰💬 <b>Извините, но введенный вами артикул не соответствует нашей системе. Пожалуйста, убедитесь, что вы ввели правильный артикул, и попробуйте снова.</b>")
 
@@ -112,8 +112,7 @@ async def basket_handler_call(callback_query: types.CallbackQuery, state: FSMCon
 
 	await state.finish()
 
-# Обработчик функции для корзины товаров
-async def basket_handler_two(callback_query: types.CallbackQuery, state: FSMContext):
+async def basket_handler_message(callback_query: types.CallbackQuery, state: FSMContext):
 	"""Создаем инлайкн клавиатуру для поиска"""
 	inline_keyboard = InlineKeyboardMarkup()
 	inline_keyboard.add(InlineKeyboardButton("🔍 Начать поиск товаров", callback_data="search"))
@@ -127,9 +126,16 @@ async def basket_handler_two(callback_query: types.CallbackQuery, state: FSMCont
 					 f"<b>Для поиска товаров, нажмите кнопку • 🔍 Начать поиск товаров</b>\n\n" \
 					 f"<b>Мы готовы помочь вам с вашими покупками!</b>"
 
-	await callback_query.answer(message_basket, reply_markup=inline_keyboard)
+	await bot.send_message(callback_query.from_user.id, message_basket, reply_markup=inline_keyboard)
 
 	await state.finish()
+
+# Обработчик кнопки "Отменить поиск"
+@dp.callback_query_handler(lambda c: c.data == 'off_search_two', state=SearchState.waiting_search_bs)
+async def back_p_bs(callback_query: types.CallbackQuery, state: FSMContext):
+	await bot.delete_message(callback_query.message.chat.id, callback_query.message.message_id)
+
+	await basket_handler_message(callback_query, state)
 
 # Обработчик кнопки "Отменить поиск"
 @dp.callback_query_handler(lambda c: c.data == 'off_search', state=SearchState.waiting_search_bs)

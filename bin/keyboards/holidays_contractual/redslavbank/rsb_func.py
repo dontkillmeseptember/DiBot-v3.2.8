@@ -125,6 +125,8 @@ async def check_user_rsb(message: types.Message, state: FSMContext):
 		try:
 			if user_remember_password_rsb == True:
 				await private_office(message, state)
+
+				await state.finish()
 			elif user_remember_password_rsb == False:
 				user_data = check_rsb_data(user_id)
 				user_name_rsb = user_data.get("username_rsb", "Пользователь")

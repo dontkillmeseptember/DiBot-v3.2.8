@@ -33,7 +33,7 @@ def create_menu_keyboard(message: types.Message):
 	keyboard.add(KeyboardButton(f"🐺 Белый Волк • Летопись Ведьмака • {days}Д {hours}Ч 🗡️"))
 	keyboard.row(
 		KeyboardButton(yml_loader.version_data["version"]["button_update"]), 
-		KeyboardButton(f"{smile} Ваш профиль — {battlepass}")
+		KeyboardButton(f"{smile} Ваш Профиль — {battlepass}")
 	)
 
 	return keyboard

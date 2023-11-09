@@ -65,8 +65,14 @@ VERSION_01_09 = os.getenv("VERSIONSITE_FIVE")
 # Переменная для хранения сайта "Обновление за 30.08.2023"
 VERSION_30_08 = os.getenv("VERSIONSITE_SIX")
 
-# Переменная для хранения сатйа "Обновление за 03.09.2023"
+# Переменная для хранения сайта "Обновление за 03.09.2023"
 VERSION_03_09 = os.getenv("VERSIONSITE_SEVEN")
+
+# Переменная для хранения сайта "Обновление за 31.10.2023"
+VERSION_31_10 = os.getenv("VERSIONSITE_EIGHT")
+
+# Переменная для хранения сайта "Обновление за 11.11.2023"
+VERSION_11_11 = os.getenv("VERSIONSITE_NINE")
 
 # Переменная для хранения сайта "Об информации 1 части ведьмака"
 WITCHER_1 = os.getenv("WITCHER_ONE")

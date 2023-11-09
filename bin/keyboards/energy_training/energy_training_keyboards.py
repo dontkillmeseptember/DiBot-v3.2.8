@@ -27,4 +27,4 @@ dp.register_message_handler(news_igor_handler, lambda message: message.text == y
 dp.register_message_handler(cooking_handler, lambda message: message.text == yml_loader.cooking_data["cooking"]["button_cooking"])
 
 # Кнопка "Корзина товаров"
-dp.register_message_handler(basket_handler, lambda message: message.text == "📁🥼 Корзина Товаров [БЕТА-ТЕСТ]")
+dp.register_message_handler(basket_handler, lambda message: message.text == "📁🥼 Корзина Товаров")

@@ -2,8 +2,10 @@ from data.functions import functions_all
 from data.mailings_db import daily_reset_has_visited_sport
 from data.scheduled import job_settings_ration, settings_calendar, settings_sport
 
-from misc.util import logging
+from misc.util import logging, executor
 from misc.loader import dp, bot, scheduler
+
+from flask_app import keep_alive
 
 from keyboards.energy_training.cooking.ration.ration_func import daily_reset_has_visited_ration
 
@@ -34,6 +36,9 @@ for sport_mallings in settings_sport:
 scheduler.add_job(daily_reset_job, "cron", hour=0)
 
 scheduler.start()
+
+# Устанавливаем flask сервер
+keep_alive()
 
 if __name__ == '__main__':
 	from aiogram import executor

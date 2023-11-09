@@ -10,10 +10,10 @@ from handlers.users.profile import profile_command
 dp.register_message_handler(main_menu, lambda message: message.text == yml_loader.main_path["main_menu"]["button_main_menu"])
 
 # Кнопка "Ваш профиль"
-text_options = ["🤵🏻 Ваш профиль —", 
-                "🐈 Ваш профиль —", 
-                "💀 Ваш профиль —", 
-                "🐋 Ваш профиль —"]
+text_options = ["🤵🏻 Ваш Профиль —", 
+                "🐈 Ваш Профиль —", 
+                "💀 Ваш Профиль —", 
+                "🐋 Ваш Профиль —"]
 
 for text in text_options:
     for progress in range(61):

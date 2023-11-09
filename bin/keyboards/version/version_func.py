@@ -19,6 +19,44 @@ async def version_handler(message: types.Message):
 
 	await bot.send_message(message.chat.id, yml_loader.version_data["version"]["button_update_info"], reply_markup=keyboard)
 
+# Обработчик вкладки "Обновление за 31.10.2023"
+async def update_four_five_four_handler(message: types.Message):
+	# Отправляем новое сообщение с информацией об обновлении
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["versions"]["button_update_4.9.2"], callback_data="update_4_9_2"))
+
+	await bot.send_message(
+			message.chat.id, 
+			yml_loader.version_data["versions"]["button_update_4.5.4_info"], 
+			reply_markup=inline_keyboard
+		)
+
+@dp.callback_query_handler(lambda query: query.data == "update_4_9_2")
+async def update_3_3_8_handler(callback_query: types.CallbackQuery):
+	# Отправляем новое сообщение с информацией об обновлении
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["versions"]["button_update_4.5.4"], callback_data="update_4_5_4"))
+
+	await bot.edit_message_text(
+			yml_loader.version_data["versions"]["button_update_4.9.2_info"],
+			callback_query.from_user.id,
+			callback_query.message.message_id, 
+			reply_markup=inline_keyboard
+		)
+
+@dp.callback_query_handler(lambda query: query.data == "update_4_5_4")
+async def update_3_3_8_handler(callback_query: types.CallbackQuery):
+	# Отправляем новое сообщение с информацией об обновлении
+	inline_keyboard = InlineKeyboardMarkup()
+	inline_keyboard.add(InlineKeyboardButton(yml_loader.version_data["versions"]["button_update_4.9.2"], callback_data="update_4_9_2"))
+
+	await bot.edit_message_text(
+			yml_loader.version_data["versions"]["button_update_4.5.4_info"],
+			callback_query.from_user.id,
+			callback_query.message.message_id, 
+			reply_markup=inline_keyboard
+		)
+
 # Обработчик вкладки "Обновление за 01.09.2023"
 async def update_zero_zero_three_handler(callback_query: types.CallbackQuery):
 	# Отправляем новое сообщение с информацией об обновлении

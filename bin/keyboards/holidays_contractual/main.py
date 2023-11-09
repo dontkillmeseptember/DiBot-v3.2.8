@@ -7,22 +7,18 @@ from data.eth_db import calculate_interest
 
 from data.base_glossary import get_russian_month
 
-def keyboard_igor(message: types.Message):
+def keyboard_igor():
 	# Получаем текущую дату и форматируем её
 	current_date = datetime.datetime.now()
 	russian_month = get_russian_month(current_date.month)
 
 	formatted_date = f"{current_date.day} {russian_month}"
 
-	# Получаем сумму платежа
-	interest_summ = calculate_interest(message)
-	formatted_interest_summ = "{:,.0f}".format(interest_summ).replace(',', ' ')
-
 	# Создаем клавиатуру с вкладками
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 	keyboard.row(
 		KeyboardButton(f"📁📅 Календарь • {formatted_date}"), 
-		KeyboardButton(f"📁💳 RedSlavBank • {formatted_interest_summ} ₽")
+		KeyboardButton(f"📁💳 RedSlavBank")
 	)
 	keyboard.add(KeyboardButton(yml_loader.contract_path["contract"]["button_contract"]))
 	keyboard.row(
@@ -31,22 +27,18 @@ def keyboard_igor(message: types.Message):
 
 	return keyboard
 
-def keyboard_dinara(message: types.Message):
+def keyboard_dinara():
 	# Получаем текущую дату и форматируем её
 	current_date = datetime.datetime.now()
 	russian_month = get_russian_month(current_date.month)
 
 	formatted_date = f"{current_date.day} {russian_month}"
 
-	# Получаем сумму платежа
-	interest_summ = calculate_interest(message)
-	formatted_interest_summ = "{:,.0f}".format(interest_summ).replace(',', ' ')
-
 	# Создаем клавиатуру с вкладками
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 	keyboard.row(
 		KeyboardButton(f"📁📅 Календарь • {formatted_date}"), 
-		KeyboardButton(f"📁💳 RedSlavBank • {formatted_interest_summ} ₽")
+		KeyboardButton(f"📁💳 RedSlavBank")
 	)
 	keyboard.add(KeyboardButton(yml_loader.contract_path["contract"]["button_contract"]))
 	keyboard.row(
@@ -56,22 +48,18 @@ def keyboard_dinara(message: types.Message):
 
 	return keyboard
 
-def keyboard_admin(message: types.Message):
+def keyboard_admin():
 	# Получаем текущую дату и форматируем её
 	current_date = datetime.datetime.now()
 	russian_month = get_russian_month(current_date.month)
 
 	formatted_date = f"{current_date.day} {russian_month}"
 
-	# Получаем сумму платежа
-	interest_summ = calculate_interest(message)
-	formatted_interest_summ = "{:,.0f}".format(interest_summ).replace(',', ' ')
-
 	# Создаем клавиатуру с вкладками
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 	keyboard.row(
 		KeyboardButton(f"📁📅 Календарь • {formatted_date}"), 
-		KeyboardButton(f"📁💳 RedSlavBank • {formatted_interest_summ} ₽")
+		KeyboardButton(f"📁💳 RedSlavBank")
 	)
 	keyboard.add(KeyboardButton(yml_loader.contract_path["contract"]["button_contract"]))
 	keyboard.row(
@@ -81,23 +69,19 @@ def keyboard_admin(message: types.Message):
 
 	return keyboard
 
-def keyboard_user(message: types.Message):
+def keyboard_user():
 	# Получаем текущую дату и форматируем её
 	current_date = datetime.datetime.now()
 	russian_month = get_russian_month(current_date.month)
 
 	formatted_date = f"{current_date.day} {russian_month}"
 
-	# Получаем сумму платежа
-	interest_summ = calculate_interest(message)
-	formatted_interest_summ = "{:,.0f}".format(interest_summ).replace(',', ' ')
-
 	# Создаем клавиатуру с вкладками
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 	keyboard.row(
 		KeyboardButton(f"📁📅 Календарь • {formatted_date}"), 
-		KeyboardButton(f"📁💳 RedSlavBank • {formatted_interest_summ} ₽")
+		KeyboardButton(f"📁💳 RedSlavBank")
 	)
 	keyboard.row(
 		KeyboardButton(yml_loader.main_path["main_menu"]["button_main_menu"])
@@ -117,16 +101,16 @@ async def holidays_contractual_menu_handler(message: types.Message):
 			selected_role = user_data[str(user_id)]["role"]
 
 			if selected_role == yml_loader.role_path["roles"]["role_igor"]:
-				keyboard = keyboard_igor(message)
+				keyboard = keyboard_igor()
 				await bot.send_message(message.chat.id, yml_loader.holidays_contractual_data["holidays_contractual_info"], reply_markup=keyboard)
 			elif selected_role == yml_loader.role_path["roles"]["role_dinara"]:
-				keyboard = keyboard_dinara(message)
+				keyboard = keyboard_dinara()
 				await bot.send_message(message.chat.id, yml_loader.holidays_contractual_data["holidays_contractual_slava_info"], reply_markup=keyboard)
 			elif selected_role == yml_loader.admin_path["admin"]["admin_role"]:
-				keyboard = keyboard_admin(message)
+				keyboard = keyboard_admin()
 				await bot.send_message(message.chat.id, yml_loader.holidays_contractual_data["holidays_contractual_slava_info"], reply_markup=keyboard)
 			elif selected_role == yml_loader.start_bot_path["registor"]["user_role"]:
-				keyboard = keyboard_user(message)
+				keyboard = keyboard_user()
 				await bot.send_message(message.chat.id, yml_loader.holidays_contractual_data["holidays_contractual_info"], reply_markup=keyboard)
 	else:
 		print("User not registor.")

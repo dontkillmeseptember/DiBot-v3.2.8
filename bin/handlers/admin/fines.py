@@ -389,49 +389,6 @@ async def aw_fines(message: types.Message):
 	else:
 		await message.answer("👩🏻‍🦰💬 <b>У вас нету прав использовать эту команду.</b>")
 
-# Функция для обработки команды /add_eth
-@dp.message_handler(commands=['add_eth'])
-async def add_eth(message: types.Message):
-	# Проверяем, является ли пользователь администратором
-	user_id = message.from_user.id
-	admin_data = load_admin_data()
-
-	if is_admin_in_data(user_id, admin_data):
-		# Разбиваем текст команды на аргументы
-		args = message.get_args().split()
-
-		if len(args) != 1:
-			await message.answer("<b>👩🏻‍🦰💬 Используйте команду <code>/add_eth</code> [сумма]</b>")
-			return
-		else:
-			amount = args[0]
-
-			# Проверяем, есть ли такой пользователь в данных
-			eth_data = load_eth_data()
-		
-			# Вычитаем сумму ETH из текущего числа
-			eth_to_rub_rate = get_eth_to_rub_rate()
-			amount_in_eth = int(amount) / eth_to_rub_rate
-
-			message_eth_to_rub_rate = eth_to_rub_rate			
-
-			formatted_amount_in_eth = round(amount_in_eth, 3)
-			formatted_eth_to_rub_rate = "{:,}".format(message_eth_to_rub_rate).replace(',', ' ')
-
-			# Обновляем JSON файл с ETH
-			eth_wallet = get_eth_wallet()
-			eth_wallet += formatted_amount_in_eth
-			eth_data["wallet"]["eth"] = eth_wallet
-			save_eth_data(eth_data)
-
-			await message.answer(f"👩🏻‍🦰💬 <b>Сумма ETH обновлена по курсу 1 ETH ~ {formatted_eth_to_rub_rate} </b>₽\n\n"
-						 	 	"<b>• Краткая информация о ETH:</b>\n" \
-							 	f"<b>↳ </b><b>Сумма ETH увеличена на • 💷 {formatted_amount_in_eth} ETH</b>\n" \
-							 	f"<b>↳ </b><b>Текущая сумма ETH • 💷 {eth_wallet} ETH</b>\n")
-
-	else:
-		await message.answer("👩🏻‍🦰💬 <b>У вас нету прав использовать эту команду.</b>")
-
 # Функция для обработки команды /add_fines
 @dp.message_handler(commands=['add_fines_s'])
 async def add_fines(message: types.Message):

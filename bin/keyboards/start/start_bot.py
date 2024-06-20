@@ -32,8 +32,8 @@ async def start_bot(message: types.Message):
 
 	if is_user_in_data(user_id, user_data):
 		# Переменная для клавиатуры
-		keyboard = create_menu_keyboard()
-		await message.answer(yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)	
+		keyboard = create_menu_keyboard(message)
+		await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_START, caption=yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)	
 	else:
 		await message.answer(yml_loader.start_bot_path["registor"]["registor_info"])
 
@@ -44,9 +44,13 @@ async def process_password(message: types.Message, state: FSMContext):
 	user = message.text
 
 	if user == PASSWORD:
+		user = message.from_user
 		user_id = message.from_user.id
 		username = message.from_user.username
+		userlastname = user.first_name
+
 		user_role = yml_loader.start_bot_path["registor"]["user_role"]
+		user_smile = yml_loader.start_bot_path["registor"]["smile_user"]
 
 		user_data = load_user_data()
 
@@ -54,12 +58,19 @@ async def process_password(message: types.Message, state: FSMContext):
 
 		if not is_user_in_data(user_id, user_data):
 			user_data[str(user_id)] = {"username": username, 
-				  					   "role": user_role, 
-				  					   "fines": "0", 
+							  		   "userlastname": userlastname,
+				  					   "role": user_role,
+									   "smile": user_smile,
+				  					   "fines": 0,
+									   "fines_slava": 0,
+									   "user_interest": 5,
 				  					   "language": None,
 									   "bot_id": None,
 									   "interface_contract": None,
-									   "version_bot": version}
+									   "version_bot": version,
+									   "battlepass": "0/60",
+									   "active_chapter": None,
+									   "sport": None}
 			save_user_data(user_data)
 
 			await message.answer(yml_loader.language_path["select_language"]["try_language"])
@@ -81,7 +92,7 @@ async def language_decision(message: types.Message, state: FSMContext):
 	version = get_bot_version()
 
 	if user_answer == "нет":
-		keyboard = create_menu_keyboard()
+		keyboard = create_menu_keyboard(message)
 		
 		# Генерация случайного 9-значного ID
 		bot_id = ''.join(str(random.randint(0, 9)) for _ in range(9))
@@ -102,7 +113,7 @@ async def language_decision(message: types.Message, state: FSMContext):
 		
 		await asyncio.sleep(5)
 
-		await message.answer(yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)
+		await bot.send_photo(chat_id=message.chat.id, photo=PHOTO_START, caption=yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)
 
 		await state.finish()
 
@@ -140,7 +151,7 @@ async def select_language(callback_query: types.CallbackQuery, state: FSMContext
 		chosen_language = callback_query.data
 
 		if chosen_language in languages:
-			keyboard = create_menu_keyboard()
+			keyboard = create_menu_keyboard(callback_query.message)
 
 			# Генерация случайного 9-значного ID
 			bot_id = ''.join(str(random.randint(0, 9)) for _ in range(9))
@@ -166,7 +177,7 @@ async def select_language(callback_query: types.CallbackQuery, state: FSMContext
 		
 			await asyncio.sleep(5)
 
-			await bot.send_message(user_id, yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)
+			await bot.send_photo(chat_id=callback_query.message.chat.id, photo=PHOTO_START, caption=yml_loader.start_bot_path["start"]["base_info"], reply_markup=keyboard)
 
 			await state.finish()
 

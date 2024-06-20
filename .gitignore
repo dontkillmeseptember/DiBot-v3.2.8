@@ -136,3 +136,5 @@ docker-compose.dev.yml
 mongodb/
 
 *.bat
+
+message_logs.txt

@@ -29,7 +29,23 @@ from keyboards.energy_training.news.message_func import (
     # Сообщения за 28.08.2023
 	month_аugust_28_handler,
 	# Сообщения за 04.09.2023
-	month_september_04_handler
+	month_september_04_handler,
+	# Сообщения за 11.09.2023
+	month_september_11_handler,
+	# Сообщения за 18.09.2023
+	month_september_18_handler,
+	# Сообщения за 25.09.2023
+	month_september_25_handler,
+	# Сообщения за 02.10.2023
+	month_october_02_handler,
+	# Сообщения за 09.10.2023
+	month_october_09_handler,
+	# Сообщения за 16.10.2023
+	month_october_16_handler,
+	# Сообщения за 23.10.2023
+	month_october_23_handler,
+	# Сообщения за 30.10.2023
+	month_october_30_handler
 )
 
 # Свяжите функции обработки сообщений с диспетчером
@@ -80,3 +96,27 @@ dp.register_message_handler(month_аugust_28_handler, lambda message: message.te
 
 # вкладка "Сообщение за 04.09.2023"
 dp.register_message_handler(month_september_04_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_nine"])
+
+# вкладка "Сообщение за 11.09.2023"
+dp.register_message_handler(month_september_11_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_ten"])
+
+# вкладка "Сообщение за 18.09.2023"
+dp.register_message_handler(month_september_18_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_one_thousand"])
+
+# вкладка "Сообщение за 25.09.2023"
+dp.register_message_handler(month_september_25_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_move"])
+
+# вкладка "Сообщение за 02.10.2023"
+dp.register_message_handler(month_october_02_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_thirteen"])
+
+# вкладка "Сообщение за 09.10.2023"
+dp.register_message_handler(month_october_09_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_fourteen"])
+
+# вкладка "Сообщение за 16.10.2023"
+dp.register_message_handler(month_october_16_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_fifteen"])
+
+# вкладка "Сообщение за 16.10.2023"
+dp.register_message_handler(month_october_23_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_sixteen"])
+
+# вкладка "Сообщение за 30.10.2023"
+dp.register_message_handler(month_october_30_handler, lambda message: message.text == yml_loader.news_path["buttons_month"]["button_seventeen"])

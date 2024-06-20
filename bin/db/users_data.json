@@ -1,23 +1,36 @@
 {
-    "5468836383": {
-        "username": "dontkillmeseptember",
-        "role": "💀 Пользователь",
-        "fines": "0",
-        "language": "🇩🇪 Deutsch"
-    },
     "5840546070": {
         "username": "killmevergil",
-        "role": "💀 Пользователь",
-        "fines": "0",
-        "language": "🇷🇺 Русский"
+        "userlastname": "BLESSED /X`",
+        "role": "Китенок",
+        "smile": "🐋",
+        "fines": 0,
+        "fines_slava": 0,
+        "user_interest": 5,
+        "language": "🇷🇺 Русский",
+        "bot_id": "850609588",
+        "interface_contract": "new_interface",
+        "version_bot": "4.5.4",
+        "battlepass": "1/60",
+        "active_chapter": "the_witcher_two",
+        "sport": "legs",
+        "quest": "Задание #2",
+        "selected_sport": "🦵🏻 Упражнения • Ноги"
     },
     "933807848": {
         "username": "slavkkkkk",
-        "role": "💀 Пользователь",
-        "fines": "44 163",
+        "userlastname": "Вячеслав",
+        "role": "Пользователь",
+        "smile": "💀",
+        "fines": 0,
+        "fines_slava": 0,
+        "user_interest": 5,
         "language": "🇷🇺 Русский",
-        "bot_id": "118220558",
-        "interface_contract": "old_interface",
-        "version_bot": "3.2.8"
+        "bot_id": "053597828",
+        "interface_contract": null,
+        "version_bot": "4.5.4",
+        "battlepass": "0/60",
+        "active_chapter": null,
+        "sport": null
     }
 }

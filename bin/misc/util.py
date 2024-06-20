@@ -13,16 +13,17 @@ import requests
 import yaml
 import random
 
-from aiogram import Bot, Dispatcher, types, utils
+from aiogram import Bot, Dispatcher, types, utils, executor
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
+from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.utils.callback_data import CallbackData
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 
 from aiogram.types.web_app_info import WebAppInfo
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, ReplyKeyboardRemove
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, ReplyKeyboardRemove, BotCommand
 
 from pathlib import Path
 

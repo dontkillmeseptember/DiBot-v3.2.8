@@ -18,9 +18,6 @@ from keyboards.holidays_contractual.holidays_contractual_keyboards import dp as 
 
 from keyboards.holidays_contractual.contract.contract_func import contract_handler
 
-from keyboards.holidays_contractual.fines.fines_func import fines_handler
-from keyboards.holidays_contractual.fines.fines_keyboards import dp as fines_dp
-
 from keyboards.holidays_contractual.calendar.calendar_func import handle_start
 
 from keyboards.quest.quest_func import quest_handler
@@ -48,7 +45,6 @@ async def all_keyboards(message: types.Message):
 	await version_handler(message)
 	await main_menu(message)
 	await holidays_contractual_handler(message, bot)
-	await fines_handler(message)
 	await quest_handler(message)
 	await energy_training_handler(message)
 	await contract_handler(message)

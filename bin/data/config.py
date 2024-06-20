@@ -6,10 +6,28 @@ load_dotenv()
 PHOTO_PATH = "https://github.com/dontkillmeseptember/DiBot-v0.0.3/blob/master/content/photo/battlepass/start_battlepass.jpg?raw=true"
 
 # Переменная для хранения фотографии
+PHOTO_PATH_PREVIEW = "https://github.com/dontkillmeseptember/DiBot/blob/v4.5.4/content/photo/battlepass/preview_battlepass.jpg?raw=true"
+
+# Переменная для хранения фотографии
 PHOTO_START = "https://github.com/dontkillmeseptember/DiBot-v0.0.3/blob/master/content/photo/start/start_bot.jpg?raw=true"
 
 # Переменная для хранения фотографии
+PHOTO_THE_WITCHER_ONE = "https://github.com/dontkillmeseptember/DiBot/blob/v4.5.4/content/photo/battlepass/witcher_one.jpg?raw=true"
+
+# Переменная для хранения фотографии
+PHOTO_THE_WITCHER_TWO = "https://github.com/dontkillmeseptember/DiBot/blob/v4.5.4/content/photo/battlepass/witcher_two.jpg?raw=true"
+
+# Переменная для хранения фотографии
+PHOTO_THE_WITCHER_THREE = "https://github.com/dontkillmeseptember/DiBot/blob/v4.5.4/content/photo/battlepass/witcher_three.jpg?raw=true"
+
+# Переменная для хранения фотографии
+PHOTO_REWARD = "https://github.com/dontkillmeseptember/DiBot/blob/v4.5.4/content/photo/battlepass/battlepass_rewards.jpg?raw=true"
+
+# Переменная для хранения фотографии
 PHOTO_PATH_CONTRACT = "https://github.com/dontkillmeseptember/DiBot-v0.0.3/blob/master/content/photo/contract/contraft_tg.jpg?raw=true"
+
+# Переменная для хранения фотографии
+PHOTO_PATH_TEST_IMAGE = "https://github.com/dontkillmeseptember/DiBot/blob/v4.5.4/content/photo/test/test_image.jpg?raw=true"
 
 # Переменная для хранения BOT_TOKEN
 BOT_TOKEN = str(os.getenv("BOT_TOKEN"))

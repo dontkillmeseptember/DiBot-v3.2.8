@@ -17,18 +17,21 @@ from data.config import (
     WITCHER_3
 )
 
-from keyboards.holidays_contractual.fines.fines_count import (
-    igor_fines_account, slava_fines_account, 
-    igor_all_fines, slava_all_fines,
-    formated_result_one, full_igor_one,
-    formated_result_two, full_igor_two,
-    formated_result_three, full_igor_three,
-    amount_in_eth, usd_equivalent_formatted,
-    rub_equivalent_formatted
-)
-
 # Получение текущий версии
 bot_version = get_bot_version()
+
+# Для вкладки свод законов
+now = datetime.datetime.now()
+
+if now.day < 25:
+    delta = datetime.datetime(now.year, now.month, 25) - now
+else:
+    next_month = now.month + 1 if now.month < 12 else 1
+    next_year = now.year + 1 if now.month == 12 else now.year
+    delta = datetime.datetime(next_year, next_month, 25) - now
+
+days_until_25th = delta.days
+hours_until_25th, seconds = divmod(delta.seconds, 3600)
 
 # Для всех вкладок
 # Получаем текущее время в указанной временной зоне
@@ -97,11 +100,18 @@ for key, value in energy_training_data.items():
         energy_training_data[key] = value
 
 # Путь к файлу holidays_contractual.yml
-holidays_contractual_path = messages_dir.joinpath("messages", "ru", "keyboards_string")
+holidays_contractual_path = messages_dir.joinpath("messages", "ru", "keyboards_string", "holidays_contractual.yml")
 
-# Загрузить holidays_contractual.yml
-with open(holidays_contractual_path / "holidays_contractual.yml", "r", encoding="utf-8") as f:
-    holidays_contractual_path = yaml.safe_load(f)
+# Загрузить energy_training.yml
+with open(holidays_contractual_path, "r", encoding="utf-8") as f:
+    holidays_contractual_data = yaml.safe_load(f)
+
+# Заменяем переменные в YAML-файле с помощью метода safe_load
+for key, value in holidays_contractual_data.items():
+    if isinstance(value, str) and "{{" in value and "}}" in value:
+        # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
+        value = value.replace("{{days}}", str(days_until_25th)).replace("{{hours}}", str(hours_until_25th)).strip()
+        holidays_contractual_data[key] = value
 
 # Путь к файлу quest.yml
 quest_path = messages_dir.joinpath("messages", "ru", "quest_string", "quest.yml")
@@ -180,13 +190,6 @@ language_path = messages_dir.joinpath("messages", "ru", "language.yml")
 with open(language_path, "r", encoding="utf-8") as f:
     language_path = yaml.safe_load(f)
 
-# Путь к файлу mailings.yml
-mailings_path = messages_dir.joinpath("messages", "ru", "handlers_string")
-
-# Загрузить mailings.yml
-with open(mailings_path / "mailings.yml", "r", encoding="utf-8") as f:
-    mailings_path = yaml.safe_load(f)
-
 # Путь к файлу calendar.yml
 calendar_path = messages_dir.joinpath("messages", "ru", "calendar_string")
 
@@ -197,31 +200,9 @@ with open(calendar_path / "calendar.yml", "r", encoding="utf-8") as f:
 # Путь к файлу fines.yml
 fines_path = messages_dir.joinpath("messages", "ru", "fines_string", "fines.yml")
 
-# Замена переменных для Игоря
-fines_igor = f"{igor_fines_account}"
-fines_all_igor = f"{igor_all_fines}"
-
-# Замена переменных для Славы
-fines_slava = f"{slava_fines_account}"
-fines_all_slava = f"{slava_all_fines}"
-
 # Загрузить fines.yml
 with open(fines_path, "r", encoding="utf-8") as f:
     fines_data = yaml.safe_load(f)
-
-# Заменяем переменные в YAML-файле с помощью метода safe_load
-for key, value in fines_data["fines_igor"].items():
-    if isinstance(value, str) and "{{" in value and "}}" in value:
-        # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
-        value = value.replace("{{igor}}", str(fines_igor)).replace("{{igorfull}}", str(igor_all_fines)).replace("{{resultone}}", str(formated_result_one)).replace("{{rate_one}}", str(full_igor_one)).replace("{{resulttwo}}", str(formated_result_two)).replace("{{rate_two}}", str(full_igor_two)).replace("{{resultthree}}", str(formated_result_three)).replace("{{rate_three}}", str(full_igor_three)).replace("{{eth}}", str(amount_in_eth)).replace("{{usd}}", str(usd_equivalent_formatted)).replace("{{rub}}", str(rub_equivalent_formatted)).strip()
-        fines_data["fines_igor"][key] = value
-
-# Заменяем переменные в YAML-файле с помощью метода safe_load
-for key, value in fines_data["fines_slava"].items():
-    if isinstance(value, str) and "{{" in value and "}}" in value:
-        # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
-        value = value.replace("{{slava}}", fines_slava).replace("{{slavafull}}", fines_all_slava).strip()
-        fines_data["fines_slava"][key] = value
 
 # Путь к файлу contract.yml
 contract_path = messages_dir.joinpath("messages", "ru", "contract_string")
@@ -286,6 +267,9 @@ for key, value in ration_data["ration_info"].items():
         value = value.replace("{{days}}", formatted_days).replace("{{hours}}", formatted_hours).strip()
         ration_data["ration_info"][key] = value
 
+# Получение рациона на эту неделю
+ration_names = ration_data["ration"]["name_ration"]
+
 # Путь к файлу admin.yml
 admin_path = messages_dir.joinpath("messages", "ru", "handlers_string")
 
@@ -327,3 +311,17 @@ role_path = messages_dir.joinpath("messages", "ru", "role_string")
 # Загрузить notices.yml
 with open(role_path / "role.yml", "r", encoding="utf-8") as f:
     role_path = yaml.safe_load(f)
+
+# Путь к файлу mailings.yml
+mailings_path = messages_dir.joinpath("messages", "ru", "handlers_string", "mailings.yml")
+
+# Загрузить mailings.yml
+with open(mailings_path, "r", encoding="utf-8") as f:
+    mailings_data = yaml.safe_load(f)
+
+# Заменяем переменные в YAML-файле с помощью метода safe_load
+for key, value in mailings_data["ration"].items():
+    if isinstance(value, str) and "{{" in value and "}}" in value:
+        # Заменяем ключевые слова "{{days}}" и "{{hours}}" на соответствующие значения
+        value = value.replace("{{ration}}", str(ration_names)).replace("{{days}}", formatted_days).replace("{{hours}}", formatted_hours).strip()
+        mailings_data["ration"][key] = value

@@ -1,4 +1,5 @@
-from misc.util import Bot, MemoryStorage, Dispatcher, pytz, AsyncIOScheduler, LoggingMiddleware
+from misc.util import Bot, MemoryStorage, Dispatcher, pytz, AsyncIOScheduler, LoggingMiddleware, BaseMiddleware, sys, asyncio
+from misc.middleware import LogMiddleware
 
 from data.config import BOT_TOKEN
 
@@ -14,8 +15,9 @@ scheduler = AsyncIOScheduler()
 # Переменная для диспетчера
 dp = Dispatcher(bot, storage=storage)
 
-# Отправляет в консоль user_id польвазетей которые отправили сообщения в чат
-dp.middleware.setup(LoggingMiddleware())
-
 # Создание ожидание времени для всех пользователей
 moscow_tz = pytz.timezone('Europe/Moscow')
+
+# Регистрируем middleware
+dp.middleware.setup(LoggingMiddleware())
+dp.middleware.setup(LogMiddleware())

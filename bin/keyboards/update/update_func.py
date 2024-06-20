@@ -74,11 +74,11 @@ async def update_bot_button_handler(message: types.Message):
 
 # Обработчик выбора вкладки "Главное меню"
 async def main_menu_update_bot_handler(message: types.Message):
-	keyboard = create_menu_keyboard()
+	keyboard = create_menu_keyboard(message)
 
 	bot_version = get_bot_version()
 
-	await bot.send_message(message.chat.id, f"{yml_loader.version_data['version_0_0_3'][f'button_update_jule_{bot_version}_info']}", reply_markup=keyboard)
+	await bot.send_message(message.chat.id, f"{yml_loader.version_data['versions'][f'button_update_{bot_version}_info']}", reply_markup=keyboard)
 
 # Обработчик для перехожа во вкладку "Главное меню"
 async def process_callback_next_update(callback_query: types.CallbackQuery):
